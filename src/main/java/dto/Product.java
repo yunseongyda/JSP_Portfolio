@@ -7,6 +7,8 @@ public class Product implements Serializable{
 	private String pname;
 	private String description;
 	private String fileName; // 이미지 파일명
+	private int quantity; // 좋아요를 누른 횟수
+	
 	
 	public Product() {
 		super();
@@ -50,5 +52,12 @@ public class Product implements Serializable{
 		this.fileName = fileName;
 	}
 	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 	
 }

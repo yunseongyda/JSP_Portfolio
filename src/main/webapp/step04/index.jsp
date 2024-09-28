@@ -208,10 +208,10 @@
 	
     <!-- Service Start -->
     <div class="container-xxl py-5">
-    <%
-				/* ArrayList<Product> listOfProducts = productDAO.getAllProducts(); */
-				ArrayList<Product> listOfProducts = ProductRepository.getInstance().getAllProducts();
-			%>
+    	<%
+			/* ArrayList<Product> listOfProducts = productDAO.getAllProducts(); */
+			ArrayList<Product> listOfProducts = ProductRepository.getInstance().getAllProducts();
+		%>
         <div class="container">
             <div class="section-title text-center">
                 <h1 class="display-5 mb-5"><fmt:message key="my"/> <fmt:message key="portfolio"/></h1>
