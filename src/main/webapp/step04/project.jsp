@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="en">
 
 <head>
@@ -34,18 +35,21 @@
 </head>
 
 <body>
+	<fmt:setLocale value='<%= request.getParameter("language") %>' />
+	<fmt:bundle basename="bundle.message">
+
     <!-- Topbar -->
     <%@ include file="navi.jsp" %>
 
     <!-- Page Header -->
     <div class="container-fluid page-header py-5 mb-5">
         <div class="container py-5">
-            <h1 class="display-3 text-white mb-3 animated slideInDown">Project</h1>
+            <h1 class="display-3 text-white mb-3 animated slideInDown"><fmt:message key="portfolio"/></h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a class="text-white" href="../resources/index.jsp">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-white active" aria-current="page">Project</li>
+                    <li class="breadcrumb-item"><a class="text-white" href="../resources/index.jsp"><fmt:message key="home"/></a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#"><fmt:message key="pages"/></a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page"><fmt:message key="portfolio"/></li>
                 </ol>
             </nav>
         </div>
@@ -55,14 +59,16 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="section-title text-center">
-                <h1 class="display-5 mb-5">Our Projects</h1>
+                <h1 class="display-5 mb-5"><fmt:message key="my"/> <fmt:message key="portfolio" /></h1>
             </div>
             <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-12 text-center">
                     <ul class="list-inline mb-5" id="portfolio-flters">
-                        <li class="mx-2 active" data-filter="*">All</li>
-                        <li class="mx-2" data-filter=".first">General Carpentry</li>
-                        <li class="mx-2" data-filter=".second">Custom Carpentry</li>
+                        <li class="mx-2 active" data-filter="*"><fmt:message key="all" /></li>
+                        <li class="mx-2" data-filter=".first"><fmt:message key="python" /></li>
+                        <li class="mx-2" data-filter=".second"><fmt:message key="dataAnalysis"/></li>
+                        <li class="mx-2" data-filter=".third"><fmt:message key="java" /></li>
+                        <li class="mx-2" data-filter=".fourth"><fmt:message key="web" /></li>
                     </ul>
                 </div>
             </div>
@@ -177,6 +183,7 @@
 
     <!-- Template JavaScript -->
     <script src="../resources/js/main.js"></script>
+    </fmt:bundle>
 </body>
 
 </html>
