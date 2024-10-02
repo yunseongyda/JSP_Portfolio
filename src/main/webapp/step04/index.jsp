@@ -233,6 +233,7 @@
                         <div class="p-4 text-center border border-5 border-light border-top-0">
                             <h4 class="mb-3"><%= product.getPname() %></h4>
                             <p><%= product.getDescription() %></p>
+                            <p><%= product.getQuantity() %></p>
                             <a class="fw-medium" href="./product.jsp?id=<%=product.getProductId() %>"><fmt:message key="readMore"/><i class="fa fa-arrow-right ms-2"></i></a>
                         </div>
                     </div>

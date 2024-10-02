@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
 <%@ page import="dto.Product" %>
 <%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>제품 상세보기</title>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8">
+    <title>like list</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
- 	<meta content="" name="description">
-<!-- Favicon -->
+    <meta content="" name="description">
+
+    <!-- Favicon -->
     <link href="../resources/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
@@ -34,22 +37,14 @@
 
     <!-- Template Stylesheet -->
     <link href="../resources/css/style.css" rel="stylesheet">
-	
-	<script>
-		function addToLike() {
-			if (confirm("이 포트폴리오에 좋아요를 누르시겠습니까?")) {
-				document.addForm.submit();
-			} else {
-				document.addForm.reset();
-			}
-		}
-	</script>
 </head>
+
 <body>
+
 	<fmt:setLocale value='<%= request.getParameter("language") %>' />
 	<fmt:bundle basename="bundle.message">
 
-	<!-- Spinner Start -->
+    <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
@@ -60,43 +55,76 @@
 	<!-- header include -->
     <%@ include file="navi.jsp" %>
     
-    <div class="container mt-3">
+    <div class="container-fluid bg-light m-5 p-5">
+    	<h1 class="p-5">좋아요 목록</h1>
+    </div>
+    <div class="container">
     	<div class="row">
-    		<h1>상품 상세 정보</h1>
-    	</div>
-    	
-    	<%
-    		String id = request.getParameter("id");
-    		/* Product product = productDAO.getProductById(id); */
-    		Product product = ProductRepository.getInstance().getProductById(id);
-    		
-    	%>
-    	
+    		<table width="100%">
+    			<tr>
+    				<td align="left">
+    					<a href="" class="btn btn-danger rounded-3">좋아요 목록 모두 삭제하기</a>
+    				</td>
+    				<td align="right">
+    					<a href="" class="btn btn-success rounded-3">추천하기</a>
+    				</td>
+    			</tr>
+    		</table>
+    	</div> <!-- row -->
     	<div class="row">
-    		<div class="col-md-6">
-    			<img class="img-fluid" src="../resources/img/product/<%=product.getFileName() %>" alt="">
-    			<h3><%=product.getPname() %></h3>
-    			<p>제품 설명: <%=product.getDescription() %></p>
-    			<p>좋아요 수: <%=product.getQuantity() %></p>
-    			<p>상품코드: <%=product.getProductId() %></p>
+    		<table width="100%">
+    			<tr>
+    				<th>아이디</th>
+    				<th>이름</th>
+    				<th>설명</th>
+    				<th>좋아요 수</th>
+    				<th>비고</th>
+    			</tr>
+    			<%
+    				int sum = 0; // 총 좋아요 수
+    				ArrayList<Product> likelist = (ArrayList<Product>)session.getAttribute("likeList");
+    				
+    				if (likelist == null) likelist = new ArrayList<Product>();
+    				
+    				for (int i=0; i<likelist.size(); i++) {
+    					Product product = likelist.get(i);
+    					sum += product.getQuantity();
+    			%>
+    			<tr>
+    				<td><%=product.getProductId() %></td>
+    				<td><%=product.getPname() %></td>
+    				<td><%=product.getDescription() %></td>
+    				<td><%=product.getQuantity() %></td>
+    				<td><a href="" class="badge badge-danger">삭제</a></td>
+    			</tr>
     			
-    			<p>
-    				<form action="./addLike.jsp?id=<%=product.getProductId() %>" name="addForm" method="post">
-    					<a href="./index.jsp#products" class="btn btn-secondary rounded-3 my-2">포트폴리오 목록</a>
-    					<input type="button" onclick="addToLike();" class="btn btn-danger rounded-3 my-2" value="좋아요"/>
-    					<a href="./like.jsp" class="btn btn-info rounded-3 my-2">좋아요 목록</a>
-    				</form>
-    			</p>
-    		</div>
-    	</div>
-    	
-    </div> <!-- container -->
+    			<%
+    				}
+    			%>
+    			<tr>
+    				<th></th>
+    				<th></th>
+    				<th>총 좋아요 수</th>
+    				<th><%=sum %></th>
+    				<th></th>
+    			</tr>
+    		</table>
+    	</div> <!-- row -->
+    </div>
+    
+    
+    
     
     
     <!-- footer include -->
     <%@ include file="footer.jsp" %>
-    
-    
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-0 back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../resources/lib/wow/wow.min.js"></script>
@@ -111,4 +139,5 @@
     <script src="../resources/js/main.js"></script>
     </fmt:bundle>
 </body>
+
 </html>
