@@ -37,6 +37,10 @@
 
     <!-- Template Stylesheet -->
     <link href="../resources/css/style.css" rel="stylesheet">
+    
+	<%
+		String likeId = session.getId();	// JsessionId 얻어오는 메소드
+	%>
 </head>
 
 <body>
@@ -55,7 +59,7 @@
 	<!-- header include -->
     <%@ include file="navi.jsp" %>
     
-    <div class="container-fluid bg-light m-5 p-5">
+    <div class="container-fluid bg-light my-4 p-5">
     	<h1 class="p-5">좋아요 목록</h1>
     </div>
     <div class="container">
@@ -63,22 +67,22 @@
     		<table width="100%">
     			<tr>
     				<td align="left">
-    					<a href="" class="btn btn-danger rounded-3">좋아요 목록 모두 삭제하기</a>
+    					<a href="./cancelAllLike.jsp?likeId=<%=likeId %>" class="btn btn-danger rounded-3">좋아요 목록 모두 삭제하기</a>
     				</td>
     				<td align="right">
-    					<a href="" class="btn btn-success rounded-3">추천하기</a>
+    					<a href="./getProjectFiles.jsp?likeId=<%=likeId %>" class="btn btn-success rounded-3">추천하기</a>
     				</td>
     			</tr>
     		</table>
     	</div> <!-- row -->
     	<div class="row">
-    		<table width="100%">
+    		<table width="100%" class="table table-hover">
     			<tr>
     				<th>아이디</th>
     				<th>이름</th>
     				<th>설명</th>
     				<th>좋아요 수</th>
-    				<th>비고</th>
+    				<th>좋아요 취소</th>
     			</tr>
     			<%
     				int sum = 0; // 총 좋아요 수
@@ -95,7 +99,7 @@
     				<td><%=product.getPname() %></td>
     				<td><%=product.getDescription() %></td>
     				<td><%=product.getQuantity() %></td>
-    				<td><a href="" class="badge badge-danger">삭제</a></td>
+    				<td><a href="./cancelLike.jsp?id=<%=product.getProductId() %>" class="badge badge-danger text-danger border">좋아요 취소</a></td>
     			</tr>
     			
     			<%
