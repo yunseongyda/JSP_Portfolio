@@ -46,7 +46,7 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="index.jsp" class="nav-item nav-link active"><fmt:message key="home" /></a>
                 <a href="addProduct.jsp" class="nav-item nav-link"><fmt:message key="addProduct" /></a>
-                <a href="index.jsp#products" class="nav-item nav-link"><fmt:message key="portfolio"/></a>
+                <a href="index.jsp#portfolios" class="nav-item nav-link"><fmt:message key="portfolio"/></a>
                 <a href="project.jsp" class="nav-item nav-link"><fmt:message key="portfolioCollection" /></a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><fmt:message key="pages" /></a>

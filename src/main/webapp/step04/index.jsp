@@ -216,7 +216,7 @@
             <div class="section-title text-center">
                 <h1 class="display-5 mb-5"><fmt:message key="my"/> <fmt:message key="portfolio"/></h1>
             </div>
-            <div class="row g-4" id="products">
+            <div class="row g-4" id="portfolios">
             <!-- card Start -->
             
 			<!-- 목록 loop -->

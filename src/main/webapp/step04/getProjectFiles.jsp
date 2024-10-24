@@ -86,29 +86,36 @@
                         </div>
                         <p class="mb-4 pb-2">수신자 정보를 입력해주세요</p>
                         <form action="./processGetProjectFiles.jsp">
+                        	<input type="hidden" name="likeId" value="<%=request.getParameter("likeId") %>"/>
                             <div class="row g-3">
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Your Name" style="height: 55px;">
+                                    <input type="text" name="name" class="form-control border-0" placeholder="Your Name"  style="height: 55px;">
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;">
+                                    <input type="email" name="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;">
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control border-0" placeholder="Your Mobile" style="height: 55px;">
+                                    <input type="text" name="mobile"class="form-control border-0" placeholder="Your Mobile" style="height: 55px;">
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <select class="form-select border-0" style="height: 55px;">
-                                        <option selected>Select A Service</option>
-                                        <option value="1">Service 1</option>
-                                        <option value="2">Service 2</option>
-                                        <option value="3">Service 3</option>
+                                    <select name="project" id="project" class="form-select border-0" style="height: 55px;">
+                                        <option selected>Select A Project</option>
+                                        <option value="project1">Service 1</option>
+                                        <option value="project2">Service 2</option>
+                                        <option value="project3">Service 3</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control border-0" placeholder="Special Note"></textarea>
+                                    <textarea id="specialNote" name="specialNote" class="form-control border-0" placeholder="Special Note"></textarea>
                                 </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                                <div class="col-4">
+                                    <input class="btn btn-primary w-100 py-3" type="submit" value="Get files"></input>
+                                </div>
+                                <div class="col-4">
+                                    <a href="./cancelGetFiles.jsp"><input class="btn btn-primary w-100 py-3" type="text" value="Cancel"></input></a>
+                                </div>
+                                <div class="col-4">
+                                    <a href="./like.jsp?likeId="<%=request.getParameter("likeId") %>"><input class="btn btn-primary w-100 py-3" type="text" value="Previous page"></input></a>
                                 </div>
                             </div>
                         </form>
@@ -140,6 +147,24 @@
 
     <!-- Template Javascript -->
     <script src="../resources/js/main.js"></script>
+    
+	<script>
+	function setSelectedProject() {
+    	const select = document.getElementById("project");
+    	const selectedValue = select.options[select.selectedIndex].value;
+    	document.getElementById("selectedProject").value = selectedValue; // 숨겨진 필드에 값 저장
+    	return true; // 폼 제출을 계속 진행
+	}
+	
+	function setSpecialNote() {
+	    // textarea의 값을 숨겨진 input에 복사
+	    const specialNoteValue = document.getElementById("specialNote").value;
+	    document.getElementById("specialNoteHidden").value = specialNoteValue;
+	    return true; // 폼 제출 계속 진행
+	}
+	</script>
+
+    
     </fmt:bundle>
 </body>
 

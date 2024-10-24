@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title> </title>
+    <title>cancelGetFiles</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -55,6 +55,17 @@
 	<!-- header include -->
     <%@ include file="navi.jsp" %>
     
+    <div class="container-fluid p-5">
+    	<h1 class="p-5">파일 받기 취소</h1>
+    </div>
+    <div class="container">
+    	<div class="row">
+    		<h2 class="alert alert-danger">파일 받기가 취소되었습니다.</h2>
+    	</div> <!-- row -->
+    	<div class="row">
+    		<p><a href="./index.jsp#portfolios">포트폴리오 목록 바로가기</a></p>
+    	</div> <!-- row -->
+    </div> <!-- container -->
     
     
     

@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title> </title>
+    <title>getFilesConfirmation</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -55,11 +55,61 @@
 	<!-- header include -->
     <%@ include file="navi.jsp" %>
     
-    
-    
-    
-    
-    
+    <!-- 주문정보를 저장할 변수 선언하고 초기화 -->
+	<%
+	String getFiles_likeId = "";
+	String getFiles_name = "";
+	String getFiles_email = "";
+	String getFiles_mobile = "";
+	String getFiles_specialNote = "";
+	String getFiles_project = "";
+	
+	Cookie[] cookies = request.getCookies();
+	
+	if (cookies != null) {
+		for (int i=0; i<cookies.length; i++) {
+			Cookie thisCookie = cookies[i];
+			String n = thisCookie.getName();
+			
+			if(n.equals("getFiles_likeId")) getFiles_likeId = thisCookie.getValue();
+			if(n.equals("getFiles_name")) getFiles_name = thisCookie.getValue();
+			if(n.equals("getFiles_email")) getFiles_email = thisCookie.getValue();
+			if(n.equals("getFiles_mobile")) getFiles_mobile = thisCookie.getValue();
+			if(n.equals("getFiles_project")) getFiles_project = thisCookie.getValue();
+			if(n.equals("getFiles_specialNote")) getFiles_specialNote = thisCookie.getValue();
+		}
+	}
+	%>
+	
+	<div class="container-fluid bg-light p-5">
+    	<h1 class="p-5">프로젝트 파일 받기 완료</h1>
+    </div>
+    <div class="container mt-4">
+    	<div class="row text-center">
+    		<h2 class="text-center">프로젝트 파일 정보</h2>
+    		<div class="col-12 alert alert-secondary ">
+    			<div class="w-100 border">
+    				<div class="text-start mb-1">
+    					<b class="fw-bold">받을 주소</b>
+    				</div>
+    				<div class="text-start">
+    					<p class="mb-0">이름 : <%out.println(getFiles_name); %></p>
+    					<p class="mb-0">이메일 : <%out.println(getFiles_email); %></p>
+    					<p class="mb-0">휴대전화 : <%out.println(getFiles_mobile); %></p>
+    					<p class="mb-0">프로젝트 이름 : <%out.println(getFiles_project); %></p>
+    					<p class="mb-0">메모 : <%out.println(getFiles_specialNote); %></p>
+    				</div>
+    				
+    			
+    			</div>
+    		</div>
+    		
+    		
+    	</div> <!-- row -->
+    	<div class="row">
+    		<p><a href="./index.jsp#portfolios">이메일을 확인해주세요.</a></p>
+    	</div> <!-- row -->
+    </div> <!-- container -->
     
     <!-- footer include -->
     <%@ include file="footer.jsp" %>
