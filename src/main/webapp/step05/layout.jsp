@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>like list</title>
+    <title> </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -37,10 +37,6 @@
 
     <!-- Template Stylesheet -->
     <link href="../resources/css/style.css" rel="stylesheet">
-    
-	<%
-		String likeId = session.getId();	// JsessionId 얻어오는 메소드
-	%>
 </head>
 
 <body>
@@ -59,62 +55,7 @@
 	<!-- header include -->
     <%@ include file="navi.jsp" %>
     
-    <div class="container-fluid bg-light my-4 p-5">
-    	<h1 class="p-5">좋아요 목록</h1>
-    </div>
-    <div class="container">
-    	<div class="row">
-    		<table width="100%">
-    			<tr>
-    				<td align="left">
-    					<a href="./cancelAllLike.jsp?likeId=<%=likeId %>" class="btn btn-danger rounded-3">좋아요 목록 모두 삭제하기</a>
-    				</td>
-    				<td align="right">
-    					<a href="./getProjectFiles.jsp?likeId=<%=likeId %>" class="btn btn-success rounded-3">프로젝트 파일 받기</a>
-    				</td>
-    			</tr>
-    		</table>
-    	</div> <!-- row -->
-    	<div class="row">
-    		<table width="100%" class="table table-hover">
-    			<tr>
-    				<th>아이디</th>
-    				<th>이름</th>
-    				<th>설명</th>
-    				<th>좋아요 수</th>
-    				<th>좋아요 취소</th>
-    			</tr>
-    			<%
-    				int sum = 0; // 총 좋아요 수
-    				ArrayList<Product> likelist = (ArrayList<Product>)session.getAttribute("likeList");
-    				
-    				if (likelist == null) likelist = new ArrayList<Product>();
-    				
-    				for (int i=0; i<likelist.size(); i++) {
-    					Product product = likelist.get(i);
-    					sum += product.getQuantity();
-    			%>
-    			<tr>
-    				<td><%=product.getProductId() %></td>
-    				<td><%=product.getPname() %></td>
-    				<td><%=product.getDescription() %></td>
-    				<td><%=product.getQuantity() %></td>
-    				<td><a href="./cancelLike.jsp?id=<%=product.getProductId() %>" class="badge badge-danger text-danger border">좋아요 취소</a></td>
-    			</tr>
-    			
-    			<%
-    				}
-    			%>
-    			<tr>
-    				<th></th>
-    				<th></th>
-    				<th>총 좋아요 수</th>
-    				<th><%=sum %></th>
-    				<th></th>
-    			</tr>
-    		</table>
-    	</div> <!-- row -->
-    </div>
+    
     
     
     
