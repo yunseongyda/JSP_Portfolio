@@ -206,12 +206,14 @@
     </div>
     <!-- About End -->
 	
+	<%@ include file="dbconn.jsp" %>
     <!-- portfolios Start -->
     <div class="container-xxl py-5">
     	<%-- <%
 			/* ArrayList<Product> listOfProducts = productDAO.getAllProducts(); */
 			ArrayList<Product> listOfProducts = ProductRepository.getInstance().getAllProducts();
 		%> --%>
+		
         <div class="container">
             <div class="section-title text-center">
                 <h1 class="display-5 mb-5"><fmt:message key="my"/> <fmt:message key="portfolio"/></h1>
@@ -220,28 +222,41 @@
             <!-- card Start -->
             
 			<!-- 목록 loop -->
-			<%
+			<%-- <%
 				for(int i=0; i<listOfProducts.size(); i++){
 					Product product = listOfProducts.get(i);
-				
+			%> --%>
+			<%
+			    if (conn == null) {
+			        out.println("Database connection is null. Cannot proceed.");
+			    } else {
+			        PreparedStatement pstmt = null;
+			        ResultSet rs = null;
+			        String sql = "SELECT * FROM portfolio";
+			        pstmt = conn.prepareStatement(sql);
+			        rs = pstmt.executeQuery();
+			        while (rs.next()) {
 			%>
-                <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="../resources/img/product/<%=product.getFileName() %>" alt="">
-                        </div>
-                        <div class="p-4 text-center border border-5 border-light border-top-0">
-                            <h4 class="mb-3"><%= product.getPname() %></h4>
-                            <p><%= product.getDescription() %></p>
-                            <p><%= product.getQuantity() %></p>
-                            <a class="fw-medium" href="./product.jsp?id=<%=product.getProductId() %>"><fmt:message key="readMore"/><i class="fa fa-arrow-right ms-2"></i></a>
-                        </div>
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid" src="../resources/img/portfolio/<%= rs.getString("p_img_name") %>" alt="">
+                    </div>
+                    <div class="p-4 text-center border border-5 border-light border-top-0">
+                        <h4 class="mb-3"><%= rs.getString("p_name") %></h4>
+                        <p><%= rs.getString("p_description") %></p>
+                        <p><%= rs.getString("p_like_counts") %></p>
+                        <a class="fw-medium" href="./project.jsp?id=<%= rs.getString("p_id") %>"><fmt:message key="readMore"/><i class="fa fa-arrow-right ms-2"></i></a>
                     </div>
                 </div>
-                <%
-                	} 
-                
-                %>
+            </div>
+			<%
+			        }
+			        // 자원 해제
+			        rs.close();
+			        pstmt.close();
+			    }
+			%>
                 
                 <!-- card End -->
             </div>

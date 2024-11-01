@@ -55,7 +55,7 @@
     
     <script>
     	function updateFileName() {
-    		const input = document.getElementById("pImg");
+    		const input = document.getElementById("p_img_name");
     		const fileNameLabel = document.getElementById("file-name");
     		if (input.files.length > 0) {
     			fileNameLabel.textContent = input.files[0].name;
@@ -79,6 +79,19 @@
     		
 
     	}
+    	
+    	function setSelectedProjectType() {
+        	const select = document.getElementById("projectType");
+        	const selectedValue = select.options[select.selectedIndex].value;
+        	document.getElementById("selectedProject").value = selectedValue; // 숨겨진 필드에 값 저장
+        	return true; // 폼 제출을 계속 진행
+    	}
+    	function setSelectedLanguageType() {
+        	const select = document.getElementById("languageType");
+        	const selectedValue = select.options[select.selectedIndex].value;
+        	document.getElementById("selectedProject").value = selectedValue; // 숨겨진 필드에 값 저장
+        	return true; // 폼 제출을 계속 진행
+    	}
     </script>
     
 </head>
@@ -101,24 +114,25 @@
     <div class="container mt-3">
     	<div class="row">
     		<div class="col">
-    			<h1><fmt:message key="title" /></h1>
+    			<h1><fmt:message key="addProject" /></h1>
     			<br />
     		</div>
     	</div>
     	
     	<%
     		String id = request.getParameter("id");
-    		Product product = productDAO.getProductById(id);
+    		/* Product product = productDAO.getProductById(id); */
+    		
     	%>
 
 		<div class="row">
-			<form class="g-3" action="./processAddProduct.jsp" method="post" enctype="multipart/form-data" name="registNewProduct">
+			<form class="g-3" action="./processAddProject.jsp" method="post" enctype="multipart/form-data" name="registNewProduct">
 				<div class="row m-3">
 					<div class="col-2">
 						<label for="newProduct" class=""><fmt:message key="productId" /></label>
 					</div>
 					<div class="col-4">
-						<input type="text" class="form-control" id="newProduct" name="newProduct">
+						<input type="text" class="form-control" id="p_id" name="p_id">
 					</div>
 				</div>
 				<div class="row m-3">
@@ -126,7 +140,7 @@
 						<label for="pName" class=""><fmt:message key="pname" /></label>
 					</div>
 					<div class="col-4">
-						<input type="text" class="form-control" id="pName" name="pName">
+						<input type="text" class="form-control" id="p_name" name="p_name">
 					</div>
 				</div>
 				<div class="row m-3">
@@ -134,19 +148,45 @@
 						<label for="pDesc" class=""><fmt:message key="description" /></label>
 					</div>
 					<div class="col-4">
-						<input type="text" class="form-control" id="pDesc" name="pDesc">
+						<input type="text" class="form-control" id="p_description" name="p_description">
 					</div>
 				</div>
 				<div class="row m-3">
 					<div class="col-2">
-						<label for="pImg" class=""><fmt:message key="fileName" /></label>
+						<label for="p_img_name" class=""><fmt:message key="fileName" /></label>
 					</div>
 					<div class="col-4">
-						<label for="pImg" class="file-label">
+						<label for="p_img_name" class="file-label">
 							<span id="file-label-text"><fmt:message key="fileSelect" /></span>
 						</label>
-						<input type="file" class="form-control" id="pImg" name="pImg" onchange="updateFileName()">
+						<input type="file" class="form-control" id="p_img_name" name="p_img_name" onchange="updateFileName()">
 						<span id="file-name"><fmt:message key="noFile" /></span>
+					</div>
+				</div>
+				<div class="row m-3">
+					<div class="col-2">
+						<label for="p_img_name" class="">Project Type</label>
+					</div>
+					<div class="col-4">
+						<select name="projectType" id="projectType" class="form-select border-1">
+                            <option selected>Select A Project Type</option>
+                            <option value="da">Data Analysis</option>
+                            <option value="wd">Web Development</option>
+                            <!-- <option value="project3"></option> -->
+                        </select>
+					</div>
+				</div>
+				<div class="row m-3">
+					<div class="col-2">
+						<label for="p_img_name" class="">Language Type</label>
+					</div>
+					<div class="col-4">
+						<select name="languageType" id="languageType" class="form-select border-1">
+                            <option selected>Select A Language Type</option>
+                            <option value="py">Python</option>
+                            <option value="fe">Front-End</option>
+                            <option value="be">Back-End</option>
+                        </select>
 					</div>
 				</div>
 
@@ -177,5 +217,6 @@
     <script src="../resources/js/main.js"></script>
     <!-- 유효성 검증 js -->
  	<script src="../resources/js/validation.js"></script>
+ 	<script src="validation.js"></script>
 </body>
 </html>
