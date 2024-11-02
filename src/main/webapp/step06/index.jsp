@@ -5,6 +5,10 @@
 <%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
+<%
+	String edit = request.getParameter("edit");
+	if (edit == null) edit="";
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -230,8 +234,7 @@
 			    if (conn == null) {
 			        out.println("Database connection is null. Cannot proceed.");
 			    } else {
-			        PreparedStatement pstmt = null;
-			        ResultSet rs = null;
+			        
 			        String sql = "SELECT * FROM portfolio";
 			        pstmt = conn.prepareStatement(sql);
 			        rs = pstmt.executeQuery();
@@ -247,14 +250,23 @@
                         <p><%= rs.getString("p_description") %></p>
                         <p><%= rs.getString("p_like_counts") %></p>
                         <a class="fw-medium" href="./project.jsp?id=<%= rs.getString("p_id") %>"><fmt:message key="readMore"/><i class="fa fa-arrow-right ms-2"></i></a>
+                        
+                        <%
+                        	if (edit.equals("update")) {
+                        %>
+                        <a class="fw-medium link-success ms-3" href="./modifyProject.jsp?id=<%=rs.getString("p_id") %>">수정하기 <i class="fas fa-edit ms-2"></i></a>
+                        <%
+                        	}
+                        %>
                     </div>
                 </div>
             </div>
 			<%
 			        }
 			        // 자원 해제
-			        rs.close();
-			        pstmt.close();
+			        if(rs!=null) rs.close();
+			        if(pstmt!=null) pstmt.close();
+			        if(conn!=null) conn.close(); 
 			    }
 			%>
                 

@@ -3,11 +3,20 @@
 <%@ page import="dto.Product" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="dbconn.jsp" %>
+<%
+	String pId = request.getParameter("id");
+	String sql = "SELECT * FROM portfolio where p_id = ?";
+	pstmt = conn.prepareStatement(sql);
+	pstmt.setString(1, pId);
+	rs = pstmt.executeQuery();
+	rs.next();
+%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>addProduct</title>
+	<title>modifyProject</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
  	<meta content="" name="description">
@@ -114,7 +123,7 @@
     <div class="container mt-3">
     	<div class="row">
     		<div class="col">
-    			<h1><fmt:message key="addProject" /></h1>
+    			<h1><fmt:message key="modifyProject" /></h1>
     			<br />
     		</div>
     	</div>
@@ -129,10 +138,10 @@
 			<form class="g-3" action="./processAddProject.jsp" method="post" enctype="multipart/form-data" name="registNewProduct">
 				<div class="row m-3">
 					<div class="col-2">
-						<label for="newProduct" class=""><fmt:message key="productId" /></label>
+						<label for="newProduct" class=""><fmt:message key="projectId" /></label>
 					</div>
 					<div class="col-4">
-						<input type="text" class="form-control" id="p_id" name="p_id">
+						<input type="text" class="form-control" id="p_id" name="p_id" value="<%=rs.getString("p_id") %>">
 					</div>
 				</div>
 				<div class="row m-3">
@@ -140,7 +149,7 @@
 						<label for="pName" class=""><fmt:message key="pname" /></label>
 					</div>
 					<div class="col-4">
-						<input type="text" class="form-control" id="p_name" name="p_name">
+						<input type="text" class="form-control" id="p_name" name="p_name" value="<%=rs.getString("p_name") %>">
 					</div>
 				</div>
 				<div class="row m-3">
@@ -148,7 +157,7 @@
 						<label for="pDesc" class=""><fmt:message key="description" /></label>
 					</div>
 					<div class="col-4">
-						<input type="text" class="form-control" id="p_description" name="p_description">
+						<input type="text" class="form-control" id="p_description" name="p_description" value="<%=rs.getString("p_description") %>">
 					</div>
 				</div>
 				<div class="row m-3">
