@@ -129,7 +129,7 @@
 			<form class="g-3" action="./processAddProject.jsp" method="post" enctype="multipart/form-data" name="registNewProduct">
 				<div class="row m-3">
 					<div class="col-2">
-						<label for="newProduct" class=""><fmt:message key="productId" /></label>
+						<label for="newProduct" class=""><fmt:message key="projectId" /></label>
 					</div>
 					<div class="col-4">
 						<input type="text" class="form-control" id="p_id" name="p_id">

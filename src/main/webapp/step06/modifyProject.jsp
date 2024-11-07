@@ -135,7 +135,7 @@
     	%>
 
 		<div class="row">
-			<form class="g-3" action="./processAddProject.jsp" method="post" enctype="multipart/form-data" name="registNewProduct">
+			<form class="g-3" action="./processModifyProject.jsp?id=<%=id %>&imgName=<%=rs.getString("p_img_name") %>" method="post" enctype="multipart/form-data" name="registNewProduct">
 				<div class="row m-3">
 					<div class="col-2">
 						<label for="newProduct" class=""><fmt:message key="projectId" /></label>
@@ -169,7 +169,17 @@
 							<span id="file-label-text"><fmt:message key="fileSelect" /></span>
 						</label>
 						<input type="file" class="form-control" id="p_img_name" name="p_img_name" onchange="updateFileName()">
+						<%
+							if (rs.getString("p_img_name") != null) {
+						%>
+						<span id="file-name"><%=rs.getString("p_img_name") %></span>
+						<%} %>
+						<%
+							if (rs.getString("p_img_name") == null) {
+						%>
 						<span id="file-name"><fmt:message key="noFile" /></span>
+						<%} %>
+						
 					</div>
 				</div>
 				<div class="row m-3">
@@ -200,7 +210,7 @@
 				</div>
 
 				<div class="col-auto">
-					<input type="button" class="btn btn-primary mb-3" value="<fmt:message key="button" />" onclick="check_form_addProduct()"></input>
+					<input type="submit" class="btn btn-primary mb-3" value="<fmt:message key="button" />"></input>
 				</div>
 			</form>
 		</div>
