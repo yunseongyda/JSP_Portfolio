@@ -52,7 +52,7 @@
                     <div class="dropdown-menu fade-up m-0">
                         <a href="addProject.jsp" class="dropdown-item"><fmt:message key="addProject" /></a>
                         <a href="index.jsp?edit=update#portfolios" class="dropdown-item"><fmt:message key="modifyProject" /></a>
-                        <a href="editProject.jsp" class="dropdown-item"><fmt:message key="deleteProject" /></a>
+                        <a href="index.jsp?edit=delete#portfolios" class="dropdown-item"><fmt:message key="deleteProject" /></a>
                     </div>
                 </div>
                 <div class="nav-item dropdown">
