@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="dto.Product" %>
 <%@ page import="dao.ProductRepository" %>
@@ -43,6 +44,40 @@
     		/* margin: 200px 100px; */
     	}
     </style>
+    <script>
+    	function checkForm() {
+    		if (!document.signUp.id.value) {
+    			alert("아이디를 입력해주세요.")
+    			return false;
+    		}
+    		if (!document.signUp.password.value) {
+    			alert("비밀번호를 입력해주세요.")
+    			return false;
+    		}
+    		if (!document.signUp.password_confirm.value) {
+    			alert("비밀번호 확인을 입력해주세요.")
+    			return false;
+    		}
+    		if (!document.signUp.name.value) {
+    			alert("이름을 입력해주세요.")
+    			return false;
+    		}
+    		if (!document.signUp.gender.value) {
+    			alert("성별을 입력해주세요.")
+    			return false;
+    		}
+    		var select_month = document.getElementById("month");
+    		if (!document.signUp.birthyy.value || !document.signUp.birthdd.value || select_month.value==="") {
+    			alert("생년월일을 입력해주세요.")
+    			return false;
+    		}
+    		if (!document.signUp.mail1.value || !document.signUp.mail2.value) {
+    			alert("이메일을 입력해주세요.")
+    			return false;
+    		}
+    		document.signUp.submit();
+    	}
+    </script>
 </head>
 
 <body>
@@ -64,24 +99,106 @@
     <div class="container my-5" id="form_layout">
     	<h1 class="display-3 text-center">Sign up</h1>
     </div>
-    <div class="container">
-    	<form>
-		  <div class="mb-3">
-		    <label for="exampleInputEmail1" class="form-label">Email address</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-		    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-		  </div>
-		  <div class="mb-3">
-		    <label for="exampleInputPassword1" class="form-label">Password</label>
-		    <input type="password" class="form-control" id="exampleInputPassword1">
-		  </div>
-		  <div class="mb-3 form-check">
-		    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-		    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
-		</form>
-    </div>
+		<div class="container">
+			<form name="signUp" class="form-horizontal" action='<c:url value="/member/processSignUp.jsp"/>' method="post">
+				<div class="gap-3">
+					<div class="form-group row">
+						<label class="col-sm-2 ">아이디</label>
+						<div class="col-sm-3">
+							<input name="id" type="text" class="form-control" placeholder="id"
+								required autofocus>
+						</div>
+					</div>
+					<div class="form-group row my-3">
+						<label class="col-sm-2">비밀번호</label>
+						<div class="col-sm-3">
+							<input name="password" type="password" class="form-control"
+								placeholder="password">
+						</div>
+					</div>
+					<div class="form-group row my-3">
+						<label class="col-sm-2">비밀번호확인</label>
+						<div class="col-sm-3">
+							<input name="password_confirm" type="password" class="form-control"
+								placeholder="password confirm">
+						</div>
+					</div>
+					<div class="form-group row my-3">
+						<label class="col-sm-2">성명</label>
+						<div class="col-sm-3">
+							<input name="name" type="text" class="form-control"
+								placeholder="name">
+						</div>
+					</div>
+					<div class="form-group row my-3">
+						<label class="col-sm-2">성별</label>
+						<div class="col-sm-10">
+							<input name="gender" type="radio" value="m" /> 남 
+							<input name="gender" type="radio" value="f" /> 여
+							<input name="gender" type="radio" value="unknown" /> 밝히지 않음
+						</div>
+					</div>
+					<div class="form-group row my-3">
+						<label class="col-sm-2">생일</label>
+						<div class="col-sm-6">
+							<!-- <input type="number" min="1900" max="2023" value="1980" class="form-control" placeholder="id" name='id'> -->
+							<input type="text" name="birthyy" maxlength="4"
+								placeholder="년(4자)" size="6" class="form-control w-25 d-inline">
+							<select name="birthmm" class="form-control w-25 d-inline" id="month">
+								<option value="">월</option>
+								<option value="01">1</option>
+								<option value="02">2</option>
+								<option value="03">3</option>
+								<option value="04">4</option>
+								<option value="05">5</option>
+								<option value="06">6</option>
+								<option value="07">7</option>
+								<option value="08">8</option>
+								<option value="09">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+							</select> <input type="text" name="birthdd" maxlength="2" placeholder="일"
+								size="4" class="form-control w-25 d-inline">
+						</div>
+					</div>
+					<div class="form-group row my-3 ">
+						<label class="col-sm-2">이메일</label>
+						<div class="col-sm-10">
+							<input type="text" name="mail1" maxlength="50">@ <select
+								name="mail2">
+								<option>naver.com</option>
+								<option>daum.net</option>
+								<option>gmail.com</option>
+								<option>nate.com</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row my-3">
+						<label class="col-sm-2">전화번호</label>
+						<div class="col-sm-3">
+							<input name="mobile" type="text" class="form-control"
+								placeholder="mobile">
+						</div>
+					</div>
+					<div class="form-group row my-3">
+						<label class="col-sm-2 ">주소</label>
+						<div class="col-sm-5">
+							<input name="address" type="text" class="form-control"
+								placeholder="address">
+						</div>
+					</div>
+					<div class="form-group row my-3">
+						<div class="col-sm-offset-2 col-sm-10 ">
+							<input type="button" class="btn btn-primary " value="등록 "
+								onclick="checkForm()"> <input type="reset"
+								class="btn btn-primary " value="취소 " onclick="reset()">
+						</div>
+					</div>
+				</div>
+				
+			</form>
+		</div>
     
     
     
