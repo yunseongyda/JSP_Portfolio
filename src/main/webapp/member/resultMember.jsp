@@ -60,6 +60,10 @@
     	String msg = request.getParameter("msg");
     	if (msg != null) {
     		if (msg.equals("1")) out.print("<h2>회원가입 해주셔서 감사합니다. 로그인 해주세요.</h2>");
+    		else if (msg.equals("2")) {
+    			String loginId = (String)session.getAttribute("sessionId");
+    			out.print("<h2>"+loginId+"님 환영합니다</h2>");
+    		}
     	} else {
     		out.print("<h2>회원정보가 존재하지 않습니다.</h2>");
     	}
