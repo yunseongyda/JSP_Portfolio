@@ -13,8 +13,8 @@
                     <small class="far fa-clock text-primary me-2"></small>
                     <small><fmt:message key="workingTime" /></small>
                     <h3 class="mx-5">
-    					<a href="&language=ko" >Korean</a> |
-    					<a href="&language=en" >English</a>
+    					<a href="?language=ko" >Korean</a> |
+    					<a href="?language=en" >English</a>
     				</h3>
                 </div>
             </div>
@@ -61,6 +61,7 @@
                     <div class="dropdown-menu fade-up m-0">
                         <a href='<c:url value="/member/signIn.jsp" />' class="dropdown-item"><fmt:message key="signIn" /></a>
                         <a href='<c:url value="/member/signUp.jsp" />' class="dropdown-item"><fmt:message key="signUp" /></a>
+                        <a href='<c:url value="/member/profiles.jsp" />' class="dropdown-item"><fmt:message key="profiles" /></a>
                     </div>
                 </div>
                 <a href='<c:url value="contact.jsp" />' class="nav-item nav-link"><fmt:message key="contactMe"/></a>

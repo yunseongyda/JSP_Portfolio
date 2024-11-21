@@ -64,6 +64,10 @@
     			String loginId = (String)session.getAttribute("sessionId");
     			out.print("<h2>"+loginId+"님 환영합니다</h2>");
     		}
+    		else if (msg.equals("3")) {
+    			String loginId = (String)session.getAttribute("sessionId");
+    			out.print("<h2>"+loginId+"님 정보가 변경되었습니다!</h2>");
+    		}
     	} else {
     		out.print("<h2>회원정보가 존재하지 않습니다.</h2>");
     	}
