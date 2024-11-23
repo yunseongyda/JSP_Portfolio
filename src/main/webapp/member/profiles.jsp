@@ -86,11 +86,11 @@
 	user="C##dbexam"
 	password="m1234" />
 
-	<%String sessionId = (String)session.getAttribute("sessionId"); %>
+	<%String _sessionId = (String)session.getAttribute("sessionId"); %>
 	
 	<sql:query dataSource="${dataSource }" var="resultSet">
 		select * from member where id =?
-		<sql:param value="<%=sessionId %>"/>
+		<sql:param value="<%=_sessionId %>"/>
 	</sql:query>
 </head>
 
@@ -123,6 +123,7 @@
 			<c:set var="birthYear" value="${birth.split('-')[0]}"/>
 			<c:set var="birthMonth" value="${birth.split('-')[1]}"/>
 			<c:set var="birthDate" value="${birth.split('-')[2]}"/>
+			
 			<form name="profiles" class="form-horizontal" action="<c:url value='/member/processUpdateProfiles.jsp'/>" method="post">
 				<div class="gap-3">
 					<div class="form-group row">
