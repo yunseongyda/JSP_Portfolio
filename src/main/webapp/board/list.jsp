@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.*" %>
 <%@ page import="dto.Product" %>
 <%@ page import="dao.ProductRepository" %>
+<%@ page import="mvc.model.BoardDTO" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
 <!DOCTYPE html>
@@ -37,6 +38,11 @@
 
     <!-- Template Stylesheet -->
     <link href="../resources/css/style.css" rel="stylesheet">
+    
+    <%
+    	int pageNum = ((Integer)request.getAttribute("pageNum")).intValue();
+    	List boardList = (List)request.getAttribute("boardList");
+    %>
 </head>
 
 <body>
@@ -53,7 +59,59 @@
     <!-- Spinner End -->
 
 	<!-- header include -->
-    <%@ include file="navi.jsp" %>
+    <%@ include file="/step06/navi.jsp" %>
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5">
+        <div class="container py-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Contact</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Contact</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+    <div class="container section-title">
+    	<h2>게시판</h2>
+    	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At error provident animi perferendis cupiditate harum quo! Suscipit placeat aspernatur voluptate delectus quos! Dolores facilis corporis quo voluptates placeat rerum dignissimos?</p>
+    </div>
+    <div class="container">
+    	<form action='<c:url value="/BoardListAction.do" />' method="post">
+    		<div class="text-right">
+    			<span class="badge badge-primary">전체 건</span>
+    		</div>
+    		<div class="pt-5">
+    			<table class="table table-hover">
+    				<tr>
+    					<th>번호</th>
+    					<th>제목</th>
+    					<th>작성일</th>
+    					<th>수정일</th>
+    					<th>조회</th>
+    					<th>글쓴이</th>
+    				</tr>
+    				<%
+    					for(int i=0; i<boardList.size(); i++){
+    						BoardDTO boardDTO = (BoardDTO)boardList.get(i);
+    				%>
+    				<tr>
+    					<td><%=boardDTO.getNum() %></td>
+    					<td><%=boardDTO.getTitle() %></td>
+    					<td><%=boardDTO.getRegist_date() %></td>
+    					<td><%=boardDTO.getUpdate_date() %></td>
+    					<td><%=boardDTO.getCount_click() %></td>
+    					<td><%=boardDTO.getName() %></td>
+    				</tr>
+    				<%	
+    					}
+    				%>
+    			</table>
+    		</div>
+    	</form>
+    </div>
     
     
     
@@ -62,7 +120,7 @@
     
     
     <!-- footer include -->
-    <%@ include file="footer.jsp" %>
+    <%@ include file="/step06/footer.jsp" %>
 
 
     <!-- Back to Top -->

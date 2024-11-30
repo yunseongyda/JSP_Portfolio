@@ -12,7 +12,8 @@ public class DBConnection {
 		String user = "C##dbexam";
 		String password = "m1234";
 		
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		//Class.forName("com.mysql.jdbc.Driver");
 		System.out.println("드라이버 등록 성공");
 		
 		// Connection 객체에 연결 결과 할당

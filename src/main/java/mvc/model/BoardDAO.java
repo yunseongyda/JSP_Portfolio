@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import mvc.database.DBConnection;
 
@@ -50,5 +51,46 @@ public class BoardDAO {
 			}
 		}
 		return x; // 선택된 총 게시글의 개수 리턴
+	}
+	
+	// 테이블의 목록을 가져오는 함수 설정
+	public ArrayList<BoardDTO> getBoardList(int page) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from board order by board_seq desc";
+		
+		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
+		try {
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardDTO board = new BoardDTO();
+				board.setNum(rs.getInt("board_seq"));
+				board.setId(rs.getString("id"));
+				board.setName(rs.getString("name"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setRegist_date(rs.getString("regist_date"));
+				board.setUpdate_date(rs.getString("update_date"));
+				board.setCount_click(rs.getString("count_click"));
+				board.setIp(rs.getString("ip"));
+				
+				list.add(board);
+			}
+		} catch(Exception e) {
+			System.out.println("getBoardList() 에러: "+e);
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+		
 	}
 }

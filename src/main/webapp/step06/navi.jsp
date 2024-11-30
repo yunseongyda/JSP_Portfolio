@@ -102,7 +102,7 @@
 	    			</c:otherwise>
 	    		</c:choose>
                 
-                <a href='<c:url value="contact.jsp" />' class="nav-item nav-link"><fmt:message key="contactMe"/></a>
+                <a href='<c:url value="/BoardListAction.do?pageNum=1" />' class="nav-item nav-link"><fmt:message key="contactMe"/></a>
             </div>
             <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block"><fmt:message key="readMore" /><i class="fa fa-arrow-right ms-3"></i></a>
         </div>
