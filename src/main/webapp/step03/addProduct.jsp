@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -92,7 +92,7 @@
     <!-- Spinner End -->
 
 	<!-- 한글과 영문 중에 원하는 언어를 선택할 수 있도록 설정 -->
-	<fmt:setLocale value='<%= request.getParameter("language") %>' />
+	<fmt:setLocale value='<%=request.getParameter("language")%>' />
 	<fmt:bundle basename="bundle.message">
 
 	<!-- header include -->
@@ -113,9 +113,9 @@
     	</div>
     	
     	<%
-    		String id = request.getParameter("id");
-    		Product product = productDAO.getProductById(id);
-    	%>
+    	    	String id = request.getParameter("id");
+    	    	    		Project product = productDAO.getProductById(id);
+    	    	%>
 
 		<div class="row">
 			<form class="g-3" action="./processAddProduct.jsp" method="post" enctype="multipart/form-data" name="registNewProduct">

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
@@ -86,11 +86,11 @@
 	user="C##dbexam"
 	password="m1234" />
 
-	<%String sessionId = (String)session.getAttribute("sessionId"); %>
+	<%String _sessionId = (String)session.getAttribute("sessionId"); %>
 	
 	<sql:query dataSource="${dataSource }" var="resultSet">
 		select * from member where id =?
-		<sql:param value="<%=sessionId %>"/>
+		<sql:param value="<%=_sessionId %>"/>
 	</sql:query>
 </head>
 

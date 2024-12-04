@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
@@ -104,6 +104,22 @@
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown"><fmt:message key="welcome" /></h5>
                                 <h1 class="display-3 text-white animated slideInDown mb-4"><fmt:message key="carouselTitle"/></h1>
                                 <p class="fs-5 fw-medium text-white mb-4 pb-2"><fmt:message key="carouselContent"/></p>
+                                <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft"><fmt:message key="readMore"/></a>
+                                <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight"><fmt:message key="contactMe"/></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="owl-carousel-item position-relative">
+                <img class="img-fluid" src="../resources/img/carousel-4.jpg" alt="">
+                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(53, 53, 53, .7);">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-lg-8 text-center">
+                                <h5 class="text-white text-uppercase mb-3 animated slideInDown"><fmt:message key="welcome" /></h5>
+                                <h1 class="display-3 text-white animated slideInDown mb-4"><fmt:message key="carouselTitle2"/></h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2"><fmt:message key="carouselContent2"/></p>
                                 <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft"><fmt:message key="readMore"/></a>
                                 <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight"><fmt:message key="contactMe"/></a>
                             </div>

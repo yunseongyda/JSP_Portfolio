@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
@@ -46,7 +46,7 @@
 	</script>
 </head>
 <body>
-	<fmt:setLocale value='<%= request.getParameter("language") %>' />
+	<fmt:setLocale value='<%=request.getParameter("language")%>' />
 	<fmt:bundle basename="bundle.message">
 
 	<!-- Spinner Start -->
@@ -66,11 +66,10 @@
     	</div>
     	
     	<%
-    		String id = request.getParameter("id");
-    		/* Product product = productDAO.getProductById(id); */
-    		Product product = ProductRepository.getInstance().getProductById(id);
-    		
-    	%>
+    	    	String id = request.getParameter("id");
+    	    	    		/* Product product = productDAO.getProductById(id); */
+    	    	    		Project product = ProductRepository.getInstance().getProductById(id);
+    	    	%>
     	
     	<div class="row">
     		<div class="col-md-6">

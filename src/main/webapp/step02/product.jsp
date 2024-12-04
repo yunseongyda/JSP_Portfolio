@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <%@ page import="dao.ProductRepository" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
 <!DOCTYPE html>
@@ -52,11 +52,10 @@
     	</div>
     	
     	<%
-    		String id = request.getParameter("id");
-    		/* Product product = productDAO.getProductById(id); */
-    		Product product = ProductRepository.getInstance().getProductById(id);
-    		
-    	%>
+    	    	String id = request.getParameter("id");
+    	    	    		/* Product product = productDAO.getProductById(id); */
+    	    	    		Project product = ProductRepository.getInstance().getProductById(id);
+    	    	%>
     	
     	<div class="row">
     		<div class="col-md-6">

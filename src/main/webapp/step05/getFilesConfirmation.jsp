@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
@@ -41,7 +41,7 @@
 
 <body>
 
-	<fmt:setLocale value='<%= request.getParameter("language") %>' />
+	<fmt:setLocale value='<%=request.getParameter("language")%>' />
 	<fmt:bundle basename="bundle.message">
 
     <!-- Spinner Start -->
@@ -58,26 +58,26 @@
     <!-- 주문정보를 저장할 변수 선언하고 초기화 -->
 	<%
 	String getFiles_likeId = "";
-	String getFiles_name = "";
-	String getFiles_email = "";
-	String getFiles_mobile = "";
-	String getFiles_specialNote = "";
-	String getFiles_project = "";
-	
-	Cookie[] cookies = request.getCookies();
-	
-	if (cookies != null) {
-		for (Cookie cookie : cookies) {
-			String n = cookie.getName();
-			
-			if(n.equals("getFiles_likeId")) getFiles_likeId = cookie.getValue();
-			if(n.equals("getFiles_name")) getFiles_name = cookie.getValue();
-			if(n.equals("getFiles_email")) getFiles_email = cookie.getValue();
-			if(n.equals("getFiles_mobile")) getFiles_mobile = cookie.getValue();
-			if(n.equals("getFiles_project")) getFiles_project = cookie.getValue();
-			if(n.equals("getFiles_specialNote")) getFiles_specialNote = cookie.getValue();
+		String getFiles_name = "";
+		String getFiles_email = "";
+		String getFiles_mobile = "";
+		String getFiles_specialNote = "";
+		String getFiles_project = "";
+		
+		Cookie[] cookies = request.getCookies();
+		
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+		String n = cookie.getName();
+		
+		if(n.equals("getFiles_likeId")) getFiles_likeId = cookie.getValue();
+		if(n.equals("getFiles_name")) getFiles_name = cookie.getValue();
+		if(n.equals("getFiles_email")) getFiles_email = cookie.getValue();
+		if(n.equals("getFiles_mobile")) getFiles_mobile = cookie.getValue();
+		if(n.equals("getFiles_project")) getFiles_project = cookie.getValue();
+		if(n.equals("getFiles_specialNote")) getFiles_specialNote = cookie.getValue();
+			}
 		}
-	}
 	%>
 	
 	<div class="container-fluid bg-light p-5">
@@ -92,11 +92,21 @@
     					<b class="fw-bold">받을 주소</b>
     				</div>
     				<div class="text-start">
-    					<p class="mb-0">이름 : <%out.println(getFiles_name); %></p>
-    					<p class="mb-0">이메일 : <%out.println(getFiles_email); %></p>
-    					<p class="mb-0">휴대전화 : <%out.println(getFiles_mobile); %></p>
-    					<p class="mb-0">프로젝트 이름 : <%out.println(getFiles_project); %></p>
-    					<p class="mb-0">메모 : <%out.println(getFiles_specialNote); %></p>
+    					<p class="mb-0">이름 : <%
+    					out.println(getFiles_name);
+    					%></p>
+    					<p class="mb-0">이메일 : <%
+    					out.println(getFiles_email);
+    					%></p>
+    					<p class="mb-0">휴대전화 : <%
+    					out.println(getFiles_mobile);
+    					%></p>
+    					<p class="mb-0">프로젝트 이름 : <%
+    					out.println(getFiles_project);
+    					%></p>
+    					<p class="mb-0">메모 : <%
+    					out.println(getFiles_specialNote);
+    					%></p>
     				</div>
     				<table width="100%" class="table table-hover border mt-4">
     					<thead>
@@ -109,15 +119,15 @@
     					</thead>
 		    			
 		    			<%
-		    				int sum = 0; // 총 좋아요 수
-		    				ArrayList<Product> likelist = (ArrayList<Product>)session.getAttribute("likeList");
-		    				
-		    				if (likelist == null) likelist = new ArrayList<Product>();
-		    				
-		    				for (int i=0; i<likelist.size(); i++) {
-		    					Product product = likelist.get(i);
-		    					sum += product.getQuantity();
-		    			%>
+		    					    			int sum = 0; // 총 좋아요 수
+		    					    					    				ArrayList<Project> likelist = (ArrayList<Project>)session.getAttribute("likeList");
+		    					    					    				
+		    					    					    				if (likelist == null) likelist = new ArrayList<Project>();
+		    					    					    				
+		    					    					    				for (int i=0; i<likelist.size(); i++) {
+		    					    					    					Project product = likelist.get(i);
+		    					    					    					sum += product.getQuantity();
+		    					    			%>
 		    			<tr>
 		    				<td><%=product.getProductId() %></td>
 		    				<td><%=product.getPname() %></td>

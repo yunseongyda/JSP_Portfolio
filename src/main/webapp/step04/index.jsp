@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
@@ -41,7 +41,7 @@
 
 <body>
 
-	<fmt:setLocale value='<%= request.getParameter("language") %>' />
+	<fmt:setLocale value='<%=request.getParameter("language")%>' />
 	<fmt:bundle basename="bundle.message">
 
     <!-- Spinner Start -->
@@ -209,9 +209,9 @@
     <!-- Service Start -->
     <div class="container-xxl py-5">
     	<%
-			/* ArrayList<Product> listOfProducts = productDAO.getAllProducts(); */
-			ArrayList<Product> listOfProducts = ProductRepository.getInstance().getAllProducts();
-		%>
+    	/* ArrayList<Product> listOfProducts = productDAO.getAllProducts(); */
+    		ArrayList<Project> listOfProducts = ProductRepository.getInstance().getAllProducts();
+    	%>
         <div class="container">
             <div class="section-title text-center">
                 <h1 class="display-5 mb-5"><fmt:message key="my"/> <fmt:message key="portfolio"/></h1>
@@ -221,9 +221,8 @@
             
 			<!-- 목록 loop -->
 			<%
-				for(int i=0; i<listOfProducts.size(); i++){
-					Product product = listOfProducts.get(i);
-				
+			for(int i=0; i<listOfProducts.size(); i++){
+						Project product = listOfProducts.get(i);
 			%>
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item">

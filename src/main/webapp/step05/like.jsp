@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
@@ -39,13 +39,13 @@
     <link href="../resources/css/style.css" rel="stylesheet">
     
 	<%
-		String likeId = session.getId();	// JsessionId 얻어오는 메소드
-	%>
+    	String likeId = session.getId();	// JsessionId 얻어오는 메소드
+    	%>
 </head>
 
 <body>
 
-	<fmt:setLocale value='<%= request.getParameter("language") %>' />
+	<fmt:setLocale value='<%=request.getParameter("language")%>' />
 	<fmt:bundle basename="bundle.message">
 
     <!-- Spinner Start -->
@@ -67,10 +67,10 @@
     		<table width="100%">
     			<tr>
     				<td align="left">
-    					<a href="./cancelAllLike.jsp?likeId=<%=likeId %>" class="btn btn-danger rounded-3">좋아요 목록 모두 삭제하기</a>
+    					<a href="./cancelAllLike.jsp?likeId=<%=likeId%>" class="btn btn-danger rounded-3">좋아요 목록 모두 삭제하기</a>
     				</td>
     				<td align="right">
-    					<a href="./getProjectFiles.jsp?likeId=<%=likeId %>" class="btn btn-success rounded-3">프로젝트 파일 받기</a>
+    					<a href="./getProjectFiles.jsp?likeId=<%=likeId%>" class="btn btn-success rounded-3">프로젝트 파일 받기</a>
     				</td>
     			</tr>
     		</table>
@@ -85,14 +85,14 @@
     				<th>좋아요 취소</th>
     			</tr>
     			<%
-    				int sum = 0; // 총 좋아요 수
-    				ArrayList<Product> likelist = (ArrayList<Product>)session.getAttribute("likeList");
-    				
-    				if (likelist == null) likelist = new ArrayList<Product>();
-    				
-    				for (int i=0; i<likelist.size(); i++) {
-    					Product product = likelist.get(i);
-    					sum += product.getQuantity();
+    			int sum = 0; // 총 좋아요 수
+    			    				ArrayList<Project> likelist = (ArrayList<Project>)session.getAttribute("likeList");
+    			    				
+    			    				if (likelist == null) likelist = new ArrayList<Project>();
+    			    				
+    			    				for (int i=0; i<likelist.size(); i++) {
+    			    					Project product = likelist.get(i);
+    			    					sum += product.getQuantity();
     			%>
     			<tr>
     				<td><%=product.getProductId() %></td>

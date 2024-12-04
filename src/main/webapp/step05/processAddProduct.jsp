@@ -3,10 +3,10 @@
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <%@ page import="dao.ProductRepository" %>
 <%
-	request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 	
 	String fileName = "";
 	String realFolder = application.getRealPath("/resources/img/product/");
@@ -38,7 +38,7 @@
 	ProductRepository dao = ProductRepository.getInstance();
 	
 	/* Product타입의 객체를 생성하고 사용자가 입력한 데이터로 제품정보를 설정 */
-	Product newProduct = new Product();
+	Project newProduct = new Project();
 	newProduct.setProductId(productId);
 	newProduct.setPname(pName);
 	newProduct.setDescription(pDesc);

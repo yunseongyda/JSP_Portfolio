@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import mvc.model.BoardDAO;
 import mvc.model.BoardDTO;
 
-public class BoardController extends HttpServlet{
+public class DataController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	static final int LISTCOUNT = 5;
 	

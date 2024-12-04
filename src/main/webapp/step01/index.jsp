@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -203,8 +203,8 @@
     <!-- Service Start -->
     <div class="container-xxl py-5">
     <%
-				ArrayList<Product> listOfProducts = productDAO.getAllProducts();
-			%>
+    ArrayList<Project> listOfProducts = productDAO.getAllProducts();
+    %>
         <div class="container">
             <div class="section-title text-center">
                 <h1 class="display-5 mb-5">Our Services</h1>
@@ -214,9 +214,8 @@
             
 			<!-- 목록 loop -->
 			<%
-				for(int i=0; i<listOfProducts.size(); i++){
-					Product product = listOfProducts.get(i);
-				
+			for(int i=0; i<listOfProducts.size(); i++){
+						Project product = listOfProducts.get(i);
 			%>
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="service-item">

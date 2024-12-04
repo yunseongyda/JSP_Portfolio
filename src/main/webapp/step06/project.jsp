@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
@@ -46,7 +46,7 @@
 	</script>
 </head>
 <body>
-	<fmt:setLocale value='<%= request.getParameter("language") %>' />
+	<fmt:setLocale value='<%=request.getParameter("language")%>' />
 	<fmt:bundle basename="bundle.message">
 
 	<!-- Spinner Start -->
@@ -66,18 +66,17 @@
     	</div>
     	<%@ include file="dbconn.jsp" %>
     	<%
-    		String id = request.getParameter("id");
-    		/* Product product = productDAO.getProductById(id); */
-    		Product product = ProductRepository.getInstance().getProductById(id);
-    		if (conn == null) {
-		        out.println("Database connection is null. Cannot proceed.");
-		    } else {
-		        String sql = "SELECT * FROM portfolio where p_id = ?";
-		        pstmt = conn.prepareStatement(sql);
-		        pstmt.setString(1, id);
-		        rs = pstmt.executeQuery();
-		        rs.next();
-		        
+    	String id = request.getParameter("id");
+    	    		/* Product product = productDAO.getProductById(id); */
+    	    		Project product = ProductRepository.getInstance().getProductById(id);
+    	    		if (conn == null) {
+    			        out.println("Database connection is null. Cannot proceed.");
+    			    } else {
+    			        String sql = "SELECT * FROM portfolio where p_id = ?";
+    			        pstmt = conn.prepareStatement(sql);
+    			        pstmt.setString(1, id);
+    			        rs = pstmt.executeQuery();
+    			        rs.next();
     	%>
     	
     	<div class="row">
