@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="dto.Project" %>
-<%@ page import="dao.ProductRepository" %>
+<%-- <%@ page import="dao.ProductRepository" %> --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
+<%-- <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/> --%>
 <%
 	String edit = request.getParameter("edit");
 	if (edit == null) edit="";
@@ -254,7 +254,11 @@
 			        String sql = "SELECT * FROM portfolio";
 			        pstmt = conn.prepareStatement(sql);
 			        rs = pstmt.executeQuery();
+			        
+			        int idx = 0;
+			        
 			        while (rs.next()) {
+			        	
 			%>
             <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item">
@@ -303,7 +307,10 @@
                 </div>
             </div>
 			<%
-			        }
+			        idx++;
+                    if(idx >= 3){
+                    	break;
+                    }}
 			        // 자원 해제
 			        if(rs!=null) rs.close();
 			        if(pstmt!=null) pstmt.close();
@@ -312,7 +319,12 @@
 			%>
                 
                 <!-- card End -->
+                
             </div>
+            <div class="row mt-3 wow fadeInUp service-item overflow-hidden">
+            	<a class="fw-medium text-center" href='<c:url value="/ProjectListAction.do" />'> <fmt:message key="viewMore"/><i class="fa fa-arrow-right ms-2"></i></a>
+            </div>
+            
         </div>
     </div>
     <!-- Service End -->

@@ -1,21 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="dto.Project" %>
 <%-- <%@ page import="dao.ProductRepository" %> --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%-- <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/> --%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>like list</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta charset="UTF-8">
+	<title>제품 상세보기</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Favicon -->
+ 	<meta content="" name="description">
+<!-- Favicon -->
     <link href="../resources/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
@@ -37,18 +34,22 @@
 
     <!-- Template Stylesheet -->
     <link href="../resources/css/style.css" rel="stylesheet">
-    
-	<%
-    	String likeId = session.getId();	// JsessionId 얻어오는 메소드
-    	%>
+	
+	<script>
+		function addToLike() {
+			if (confirm("이 포트폴리오에 좋아요를 누르시겠습니까?")) {
+				document.addForm.submit();
+			} else {
+				document.addForm.reset();
+			}
+		}
+	</script>
 </head>
-
 <body>
-
 	<fmt:setLocale value='<%=request.getParameter("language")%>' />
 	<fmt:bundle basename="bundle.message">
 
-    <!-- Spinner Start -->
+	<!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
@@ -57,78 +58,58 @@
     <!-- Spinner End -->
 
 	<!-- header include -->
-    <%@ include file="navi.jsp" %>
+    <%@ include file="/step06/navi.jsp" %>
     
-    <div class="container-fluid bg-light my-4 p-5">
-    	<h1 class="p-5">좋아요 목록</h1>
-    </div>
-    <div class="container">
+    <div class="container mt-3">
     	<div class="row">
-    		<table width="100%">
-    			<tr>
-    				<td align="left">
-    					<a href="./cancelAllLike.jsp?likeId=<%=likeId%>" class="btn btn-danger rounded-3">좋아요 목록 모두 삭제하기</a>
-    				</td>
-    				<td align="right">
-    					<a href="./getProjectFiles.jsp?likeId=<%=likeId%>" class="btn btn-success rounded-3">프로젝트 파일 받기</a>
-    				</td>
-    			</tr>
-    		</table>
-    	</div> <!-- row -->
+    		<h1>상품 상세 정보</h1>
+    	</div>
+    	<%@ include file="dbconn.jsp" %>
+    	<%
+    	String id = request.getParameter("id");
+    	    		/* Product product = productDAO.getProductById(id); */
+    	    		Project product = ProductRepository.getInstance().getProductById(id);
+    	    		if (conn == null) {
+    			        out.println("Database connection is null. Cannot proceed.");
+    			    } else {
+    			        String sql = "SELECT * FROM portfolio where p_id = ?";
+    			        pstmt = conn.prepareStatement(sql);
+    			        pstmt.setString(1, id);
+    			        rs = pstmt.executeQuery();
+    			        rs.next();
+    	%>
+    	
     	<div class="row">
-    		<table width="100%" class="table table-hover">
-    			<tr>
-    				<th>아이디</th>
-    				<th>이름</th>
-    				<th>설명</th>
-    				<th>좋아요 수</th>
-    				<th>좋아요 취소</th>
-    			</tr>
-    			<%
-    			int sum = 0; // 총 좋아요 수
-    			    				ArrayList<Project> likelist = (ArrayList<Project>)session.getAttribute("likeList");
-    			    				
-    			    				if (likelist == null) likelist = new ArrayList<Project>();
-    			    				
-    			    				for (int i=0; i<likelist.size(); i++) {
-    			    					Project product = likelist.get(i);
-    			    					sum += product.getQuantity();
-    			%>
-    			<tr>
-    				<td><%=product.getProductId() %></td>
-    				<td><%=product.getPname() %></td>
-    				<td><%=product.getDescription() %></td>
-    				<td><%=product.getQuantity() %></td>
-    				<td><a href="./cancelLike.jsp?id=<%=product.getProductId() %>" class="badge badge-danger text-danger border">좋아요 취소</a></td>
-    			</tr>
+    		<div class="col-md-6">
+    			<img class="img-fluid" src="../resources/img/portfolio/<%=rs.getString("p_img_name") %>" alt="">
+    			<h3><%=rs.getString("p_name") %></h3>
+    			<p>프로젝트 설명: <%=rs.getString("p_description") %></p>
+    			<p>좋아요 수: <%=rs.getString("p_like_counts") %></p>
+    			<p>프로젝트 코드: <%=rs.getString("p_id") %></p>
+    			<p>프로젝트 타입: <fmt:message key='<%=rs.getString("p_type")%>' /> </p>
+    			<p>언어 종류: <fmt:message key='<%=rs.getString("p_language_type") %>' /></p>
     			
-    			<%
-    				}
-    			%>
-    			<tr>
-    				<th></th>
-    				<th></th>
-    				<th>총 좋아요 수</th>
-    				<th><%=sum %></th>
-    				<th></th>
-    			</tr>
-    		</table>
-    	</div> <!-- row -->
-    </div>
-    
-    
-    
+    			<p>
+    				<form action="./addLike.jsp?id=<%=rs.getString("p_id") %>" name="addForm" method="post">
+    					<a href="./index.jsp#products" class="btn btn-secondary rounded-3 my-2">포트폴리오 목록</a>
+    					<input type="button" onclick="addToLike();" class="btn btn-danger rounded-3 my-2" value="좋아요"/>
+    					<a href="./like.jsp" class="btn btn-info rounded-3 my-2">좋아요 목록</a>
+    				</form>
+    			</p>
+    		</div>
+    		<%
+    		rs.close();
+	        pstmt.close();
+	        }
+	        %>
+    	</div>
+    </div> <!-- container -->
     
     
     <!-- footer include -->
-    <%@ include file="footer.jsp" %>
-
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-0 back-to-top"><i class="bi bi-arrow-up"></i></a>
-
-
-    <!-- JavaScript Libraries -->
+    <%@ include file="/step06/footer.jsp" %>
+    
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../resources/lib/wow/wow.min.js"></script>
@@ -143,5 +124,4 @@
     <script src="../resources/js/main.js"></script>
     </fmt:bundle>
 </body>
-
 </html>

@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="dto.Project" %>
-<%@ page import="dao.ProductRepository" %>
+<%-- <%@ page import="dao.ProductRepository" %> --%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
+<%-- <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/> --%>
 <!DOCTYPE html>
 <html lang="en">
 

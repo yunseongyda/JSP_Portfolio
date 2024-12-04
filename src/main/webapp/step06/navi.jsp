@@ -66,7 +66,7 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href='<c:url value="index.jsp" />' class="nav-item nav-link active"><fmt:message key="home" /></a>
                 <a href='<c:url value="index.jsp#portfolios" />' class="nav-item nav-link"><fmt:message key="portfolio"/></a>
-                <a href='<c:url value="portfolioCollection.jsp" />' class="nav-item nav-link"><fmt:message key="portfolioCollection" /></a>
+                <a href='<c:url value="/ProjectListAction.do" />' class="nav-item nav-link"><fmt:message key="portfolioCollection" /></a>
 	            <c:choose>
 	   				<c:when test='${sessionId eq "admin" }'>
 			            <div class="nav-item dropdown">

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ProjectRepository;
+import dto.Project;
 import mvc.model.BoardDAO;
 import mvc.model.BoardDTO;
 
@@ -28,7 +30,7 @@ public class DataController extends HttpServlet{
 		System.out.println(RequestURI);
 		System.out.println(contextPath);
 		
-		 String  command = RequestURI.substring(contextPath.length());
+		String command = RequestURI.substring(contextPath.length());
 		
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
@@ -36,6 +38,12 @@ public class DataController extends HttpServlet{
 		if(command.equals("/BoardListAction.do")) {
 			requestBoardList(request);
 			RequestDispatcher rd = request.getRequestDispatcher("./board/list.jsp");
+			rd.forward(request, response);
+		}
+		
+		if(command.equals("/ProjectListAction.do")) {
+			requestProjectList(request);
+			RequestDispatcher rd = request.getRequestDispatcher("./project/portfolioCollection.jsp");
 			rd.forward(request, response);
 		}
 	}
@@ -54,4 +62,13 @@ public class DataController extends HttpServlet{
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("boardList", boardList);
 	}
+	
+	public void requestProjectList(HttpServletRequest request) { // 등록된 글 목록 가져오기
+		ProjectRepository dao = ProjectRepository.getInstance();
+		List<Project> projectList = dao.getAllProject(request.getParameter("constraint"));  // 다형성
+		
+		request.setAttribute("projects", projectList);
+		System.out.println("아우");
+	}
+	
 }
