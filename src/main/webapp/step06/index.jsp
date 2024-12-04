@@ -14,7 +14,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Woody - Carpenter Website Template</title>
+    <title>dev KYS - Project Collection Website</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -86,8 +86,8 @@
                         <div class="row justify-content-center">
                             <div class="col-12 col-lg-8 text-center">
                                 <h5 class="text-white text-uppercase mb-3 animated slideInDown"><fmt:message key="welcome" /></h5>
-                                <h1 class="display-3 text-white animated slideInDown mb-4"><fmt:message key="carouselTitle"/></h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2"><fmt:message key="carouselContent"/></p>
+                                <h1 class="display-3 text-white animated slideInDown mb-4"><fmt:message key="carouselTitle2"/></h1>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-2"><fmt:message key="carouselContent2"/></p>
                                 <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft"><fmt:message key="readMore"/></a>
                                 <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight"><fmt:message key="contactMe"/></a>
                             </div>

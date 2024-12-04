@@ -57,7 +57,7 @@
     <!-- 일반 사용자용 네브 -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
         <a href='<c:url value="/step06/index.jsp" />' class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <h2 class="m-0 text-primary">WooDY</h2>
+            <h2 class="m-0 text-primary">dev KYS</h2>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
