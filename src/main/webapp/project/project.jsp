@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="dto.Project" %>
-<%-- <%@ page import="dao.ProductRepository" %> --%>
+<%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%-- <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/> --%>
+<jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,11 +64,11 @@
     	<div class="row">
     		<h1>상품 상세 정보</h1>
     	</div>
-    	<%@ include file="dbconn.jsp" %>
+    	<%@ include file="/step06/dbconn.jsp" %>
     	<%
     	String id = request.getParameter("id");
     	    		/* Product product = productDAO.getProductById(id); */
-    	    		Project product = ProductRepository.getInstance().getProductById(id);
+    	    		Product product = ProductRepository.getInstance().getProductById(id);
     	    		if (conn == null) {
     			        out.println("Database connection is null. Cannot proceed.");
     			    } else {

@@ -8,8 +8,8 @@ public class DBConnection {
 	public static Connection getConnection() throws ClassNotFoundException, SQLException {
 		
 		Connection conn = null;
-		String url = "jdbc:oracle:thin:@192.168.123.101:1521:xe";
-		/* String url = "jdbc:oracle:thin:@localhost:1521:xe"; */
+		/* String url = "jdbc:oracle:thin:@192.168.123.101:1521:xe"; */
+		String url = "jdbc:oracle:thin:@localhost:1521:xe"; 
 		String user = "C##dbexam";
 		String password = "m1234";
 		

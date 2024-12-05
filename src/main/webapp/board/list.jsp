@@ -17,7 +17,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="../resources/img/favicon.ico" rel="icon">
+    <link href="${pageContext.request.contextPath }/resources/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,19 +29,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="../resources/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="../resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="../resources/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/css/style.css" rel="stylesheet">
     
     <%
     	int pageNum = ((Integer)request.getAttribute("pageNum")).intValue();
-    	List boardList = (List)request.getAttribute("boardList");
+    	List boardList = (List)request.getAttribute("boardlist");
+    	int total_record = (Integer)request.getAttribute("total_record");
+    	int total_page = (Integer)request.getAttribute("total_page");
     %>
 </head>
 
@@ -78,6 +80,9 @@
     	<h2>게시판</h2>
     	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At error provident animi perferendis cupiditate harum quo! Suscipit placeat aspernatur voluptate delectus quos! Dolores facilis corporis quo voluptates placeat rerum dignissimos?</p>
     </div>
+    <div class="text-center">
+    	<span>전체 <%=total_record %>건</span>
+    </div>
     <div class="container">
     	<form action='<c:url value="/BoardListAction.do" />' method="post">
     		<div class="text-right">
@@ -110,6 +115,58 @@
     				%>
     			</table>
     		</div>
+    		
+    		<div class="text-center">
+    			<table class="w-100">
+    				<tr>
+    					<td width="150px" align="left">
+	    					<select name="items" class="txt">
+		    					<option value="subject">제목에서</option>
+		    					<option value="content">본문에서</option>
+		    					<option value="name">글쓴이에서</option>
+		    				</select>
+		    				<input type="text" name="text" />
+		    				<input type="submit" class="btn btn-info" value="검색" />
+		    				<a class="btn btn-primary" href="'<c:url value="/BoardListAction.do?pageNum=1"/>'">검색 초기화</a>
+    					</td>
+    					<td width="100" align="right">
+    						<a href="#">글쓰기</a>
+    					</td>
+    				</tr>
+    			</table>
+    		</div>
+    		
+    		<!-- 페이징 구조 추가 -->
+    		<div align="center">
+    			<c:set var="pageNum" value="<%=pageNum %>" />
+    			<c:forEach var="i" begin="1" end="<%=total_page %>">
+    				<c:if test="${items != null && text != null }">
+    					<a href='<c:url value="/BoardListAction.do?pageNum=${i}&items=${items}&text=${text}"/>'>
+    						<c:choose>
+    							<c:when test="${pageNum == i }">
+    								<b>[${i }]</b>
+    							</c:when>
+    							<c:otherwise>
+    								[${i }]
+    							</c:otherwise>
+    						</c:choose>
+    					</a>
+    				</c:if>
+    				<c:if test="${items == null && text == null }">
+    					<a href='<c:url value="/BoardListAction.do?pageNum=${i}"/>'>
+    						<c:choose>
+    							<c:when test="${pageNum == i }">
+    								<b>[${i }]</b>
+    							</c:when>
+    							<c:otherwise>
+    								[${i }]
+    							</c:otherwise>
+    						</c:choose>
+    					</a>
+    				</c:if>
+    			</c:forEach>
+    			
+    		</div>
     	</form>
     </div>
     
@@ -130,16 +187,16 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../resources/lib/wow/wow.min.js"></script>
-    <script src="../resources/lib/easing/easing.min.js"></script>
-    <script src="../resources/lib/waypoints/waypoints.min.js"></script>
-    <script src="../resources/lib/counterup/counterup.min.js"></script>
-    <script src="../resources/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="../resources/lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="../resources/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/wow/wow.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/easing/easing.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/waypoints/waypoints.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/counterup/counterup.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/lightbox/js/lightbox.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="../resources/js/main.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
     </fmt:bundle>
 </body>
 

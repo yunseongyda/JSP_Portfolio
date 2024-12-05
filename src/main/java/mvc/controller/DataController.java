@@ -61,6 +61,29 @@ public class DataController extends HttpServlet{
 		
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("boardList", boardList);
+		
+		String items = request.getParameter("items");
+		String text = request.getParameter("text");
+		
+		// 매개변수 2개짜리: 게시판의 총 개수 리턴
+		int total_record = dao.getListCount(items, text);
+		// 매개변수 4개짜리
+		boardList = dao.getBoardList(pageNum, limit, items, text);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("total_record", total_record);
+		request.setAttribute("boardList", boardList);
+		
+		// 페이징 개수 구하기
+		int total_page; // 30 => 6개
+		
+		if(total_record % limit == 0) {
+			total_page = total_record / limit;
+		} else {
+			total_page = (total_record / limit)+1; 
+		}
+		
+		request.setAttribute("total_page", total_page);
+		request.setAttribute("boardlist", boardList);
 	}
 	
 	public void requestProjectList(HttpServletRequest request) { // 등록된 글 목록 가져오기

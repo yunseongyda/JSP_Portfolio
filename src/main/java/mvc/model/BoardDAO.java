@@ -31,14 +31,15 @@ public class BoardDAO {
 		if (items == null && text == null) // 검색을 안 했을 때
 			sql = "select count(*) from board";
 		else
-			sql = "select count(*) from board where"+items+"like '%"+text+"%'";
+			sql = "select count(*) from board where "+items+" like '%"+text+"%'";
 		
 		try {
 			conn = DBConnection.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) x= rs.getInt(x);
+			if(rs.next()) x= rs.getInt(1);
+			System.out.println("X:"+x);
 		} catch(Exception e) {
 			System.out.println("getListCount() error: "+e);
 		} finally {
@@ -80,7 +81,7 @@ public class BoardDAO {
 				list.add(board);
 			}
 		} catch(Exception e) {
-			System.out.println("getBoardList() 에러: "+e);
+			System.out.println("매개변수 1개짜리 getBoardList() 에러: "+e);
 		} finally {
 			try {
 				if(rs != null) rs.close();
@@ -92,5 +93,64 @@ public class BoardDAO {
 		}
 		return list;
 		
+	}
+	
+	// 게시판 하단의 페이징과 검색기능
+	public ArrayList<BoardDTO> getBoardList(int page, int limit, String items, String text){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int total_record = getListCount(items, text);
+		   
+		int start = (page - 1) * limit;  //start:0,5,10....5,10,15...
+		int index = start + 1; //1,6,11...6,11,16...
+		System.out.println("===index찍기 :"+index);  
+		String sql;
+		
+		if(items == null && text == null) {
+			sql = "select * from board order by board_seq desc";
+		} else {
+			 sql = "select * from board where "+items+" like '%"+text+"%' order by board_seq desc";
+		}
+		
+		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
+		try {
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardDTO board = new BoardDTO();
+				board.setNum(rs.getInt("board_seq"));
+				board.setId(rs.getString("id"));
+				board.setName(rs.getString("name"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setRegist_date(rs.getString("regist_date"));
+				board.setUpdate_date(rs.getString("update_date"));
+				board.setCount_click(rs.getString("count_click"));
+				board.setIp(rs.getString("ip"));
+				
+				list.add(board);
+				
+				// 페이징 로직 처리
+				if(index< (start+limit) && index <= total_record) {
+					index++;
+					System.out.println("===index2찍기 :"+index);
+				}
+				else break;
+			}
+		} catch(Exception e) {
+			System.out.println("매개변수 4개짜리 getBoardList() 에러: "+e);
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 }
