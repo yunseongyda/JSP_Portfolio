@@ -57,7 +57,23 @@ public class DataController extends HttpServlet{
 			requestBoardWrite(request);
 			RequestDispatcher rd = request.getRequestDispatcher("/BoardListAction.do");
 			rd.forward(request, response);
+			
+		} else if(command.equals("/BoardViewAction.do")) {
+			// TODO- 글을 보는 로직을 수행하는 함수 생성
+			requestBoardView(request);
+			RequestDispatcher rd = request.getRequestDispatcher("/BoardView.do");
+			rd.forward(request, response);
+			
+		} else if(command.equals("/BoardView.do")) {
+			RequestDispatcher rd = request.getRequestDispatcher("./board/view.jsp");
+			rd.forward(request, response);
+			
+		} else if(command.equals("/BoardUpdateActoin.do")) {
+			requestBoardUpdate(request);
+			RequestDispatcher rd = request.getRequestDispatcher("/BoardListAction.do");
+			rd.forward(request, response);
 		}
+		
 	}
 	
 	public void requestBoardList(HttpServletRequest request) { // 등록된 글 목록 가져오기
@@ -116,6 +132,7 @@ public class DataController extends HttpServlet{
 		request.setAttribute("name", name);
 	}
 	
+	// 게시글 쓰기
 	public void requestBoardWrite(HttpServletRequest request) {
 		BoardDAO dao = BoardDAO.getInstance();
 		
@@ -127,6 +144,40 @@ public class DataController extends HttpServlet{
 		board.setIp(request.getRemoteAddr());
 		
 		dao.insertBoard(board);
+	}
+	
+	// 게시글 상세 페이지 가져오기
+	public void requestBoardView(HttpServletRequest request) {
+		BoardDAO dao = BoardDAO.getInstance();
+		int num = Integer.parseInt(request.getParameter("num"));
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		
+		BoardDTO board = new BoardDTO();
+		board = dao.getBoardByNum(num, pageNum);
+		
+		request.setAttribute("num", num);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("board", board);
+	}
+	
+	// 글 수정하기
+	public void requestBoardUpdate(HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("num"));
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		
+		BoardDAO dao = BoardDAO.getInstance();
+	
+		BoardDTO board = new BoardDTO();
+		board.setNum(num);
+		board.setName(request.getParameter("name"));
+		board.setTitle(request.getParameter("title"));
+		board.setContent(request.getParameter("content"));
+		board.setUpdate_date(request.getParameter("update_date"));
+		board.setIp(request.getRemoteAddr());
+		
+		dao.updateBoard(board);
+		
+		
 	}
 	
 }

@@ -119,7 +119,7 @@
     				%>
     				<tr>
     					<td><%=boardDTO.getNum() %></td>
-    					<td><%=boardDTO.getTitle() %></td>
+    					<td><a href="./BoardViewAction.do?num=<%=boardDTO.getNum() %>&pageNum=<%=pageNum %>"><%=boardDTO.getTitle() %></a></td>
     					<td><%=boardDTO.getRegist_date() %></td>
     					<td><%=boardDTO.getUpdate_date() %></td>
     					<td><%=boardDTO.getCount_click() %></td>

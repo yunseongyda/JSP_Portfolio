@@ -158,7 +158,7 @@ public class BoardDAO {
 	public String getSignInNameById(String id) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;ㅁㅁㅁ
+		ResultSet rs = null;
 		
 		String name = null;
 		String sql = "select name from member where id=?";
@@ -217,7 +217,108 @@ public class BoardDAO {
 		}
 	}
 	
+	// 선택된 글 상세 내용 가져오기
+	public BoardDTO getBoardByNum(int num, int pageNum) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardDTO board = null;
+		
+		increaseClickCount(num);
+		
+		String sql = "select * from board where board_seq = ?";
+		
+		try {
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				board = new BoardDTO();
+				board.setNum(rs.getInt("board_seq"));
+				board.setId(rs.getString("id"));
+				board.setName(rs.getString("name"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setCount_click(rs.getInt("count_click"));
+				board.setIp(rs.getString("ip"));
+				board.setRegist_date(rs.getString("regist_date"));
+				board.setUpdate_date(rs.getString("update_date"));
+				
+			}
+			
+			System.out.println("pstmt.getBoardByNum() 실행");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("getBoardByNum() 에러 : "+e);
+		} finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return board;
+	}
 	
+	// 클릭 수 증가
+	public void increaseClickCount(int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		BoardDTO board = null;
+		
+		try {
+			conn = DBConnection.getConnection();
+			String sql = "update board set count_click=count_click+1 where board_seq=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			
+			System.out.println("increaseClickCount() 실행");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("increaseClickCount() 에러 : "+e);
+		} finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	// 게시글 수정
+	public void updateBoard(BoardDTO board) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "update board set title=?, content=?, update_date=sysdate, ip=?  where board_seq=?";
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, board.getTitle());
+			pstmt.setString(2, board.getContent());
+			pstmt.setString(3, board.getIp());
+			pstmt.setInt(4, board.getNum());
+			
+			pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("updateBoard() 에러 : "+e);
+		} finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	
 }
