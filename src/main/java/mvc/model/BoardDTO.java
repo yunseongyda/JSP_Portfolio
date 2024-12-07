@@ -8,7 +8,7 @@ public class BoardDTO {
 	private String content;
 	private String regist_date;
 	private String update_date;
-	private String count_click;
+	private int count_click;
 	private String ip;
 	
 	
@@ -54,10 +54,10 @@ public class BoardDTO {
 	public void setUpdate_date(String update_date) {
 		this.update_date = update_date;
 	}
-	public String getCount_click() {
+	public int getCount_click() {
 		return count_click;
 	}
-	public void setCount_click(String count_click) {
+	public void setCount_click(int count_click) {
 		this.count_click = count_click;
 	}
 	public String getIp() {

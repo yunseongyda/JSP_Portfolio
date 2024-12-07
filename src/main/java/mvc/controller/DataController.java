@@ -46,6 +46,18 @@ public class DataController extends HttpServlet{
 			RequestDispatcher rd = request.getRequestDispatcher("./project/portfolioCollection.jsp");
 			rd.forward(request, response);
 		}
+		
+		if(command.equals("/BoardWriteForm.do")) {
+			reqeustSignInName(request);
+			RequestDispatcher rd = request.getRequestDispatcher("./board/writeBoard.jsp");
+			rd.forward(request, response);
+			
+		} else if(command.equals("/BoardWriteActoin.do")) {
+			// TODO- 글쓰는 로직을 수행하는 함수 생성
+			requestBoardWrite(request);
+			RequestDispatcher rd = request.getRequestDispatcher("/BoardListAction.do");
+			rd.forward(request, response);
+		}
 	}
 	
 	public void requestBoardList(HttpServletRequest request) { // 등록된 글 목록 가져오기
@@ -69,6 +81,8 @@ public class DataController extends HttpServlet{
 		int total_record = dao.getListCount(items, text);
 		// 매개변수 4개짜리
 		boardList = dao.getBoardList(pageNum, limit, items, text);
+		request.setAttribute("items", items);
+		request.setAttribute("text", text);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("total_record", total_record);
 		request.setAttribute("boardList", boardList);
@@ -92,6 +106,27 @@ public class DataController extends HttpServlet{
 		
 		request.setAttribute("projects", projectList);
 		System.out.println("아우");
+	}
+	
+	// 인증된 사용자명을 가져오는 함수 구현
+	public void reqeustSignInName(HttpServletRequest request) {
+		String id = request.getParameter("id");
+		BoardDAO dao = BoardDAO.getInstance();
+		String name = dao.getSignInNameById(id);
+		request.setAttribute("name", name);
+	}
+	
+	public void requestBoardWrite(HttpServletRequest request) {
+		BoardDAO dao = BoardDAO.getInstance();
+		
+		BoardDTO board = new BoardDTO();	
+		board.setId(request.getParameter("id"));
+		board.setName(request.getParameter("name"));
+		board.setTitle(request.getParameter("title"));
+		board.setContent(request.getParameter("content"));
+		board.setIp(request.getRemoteAddr());
+		
+		dao.insertBoard(board);
 	}
 	
 }

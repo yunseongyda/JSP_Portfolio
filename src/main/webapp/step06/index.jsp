@@ -269,7 +269,7 @@
                         <h4 class="mb-3"><%= rs.getString("p_name") %></h4>
                         <p><%= rs.getString("p_description") %></p>
                         <p><%= rs.getString("p_like_counts") %></p>
-                        <a class="fw-medium" href="./project.jsp?id=<%= rs.getString("p_id") %>"><fmt:message key="readMore"/><i class="fa fa-arrow-right ms-2"></i></a>
+                        <a class="fw-medium" href="../project/project.jsp?id=<%= rs.getString("p_id") %>"><fmt:message key="readMore"/><i class="fa fa-arrow-right ms-2"></i></a>
                         
                         <%
                         	if (edit.equals("update")) {

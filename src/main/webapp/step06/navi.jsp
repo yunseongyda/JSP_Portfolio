@@ -65,7 +65,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href='<c:url value="index.jsp" />' class="nav-item nav-link active"><fmt:message key="home" /></a>
-                <a href='<c:url value="index.jsp#portfolios" />' class="nav-item nav-link"><fmt:message key="portfolio"/></a>
+                <a href='<c:url value="/step06/index.jsp#portfolios" />' class="nav-item nav-link"><fmt:message key="portfolio"/></a>
                 <a href='<c:url value="/ProjectListAction.do" />' class="nav-item nav-link"><fmt:message key="portfolioCollection" /></a>
 	            <c:choose>
 	   				<c:when test='${sessionId eq "admin" }'>
@@ -102,7 +102,7 @@
 	    			</c:otherwise>
 	    		</c:choose>
                 
-                <a href='<c:url value="/BoardListAction.do?pageNum=1" />' class="nav-item nav-link"><fmt:message key="contactMe"/></a>
+                <a href='<c:url value="/BoardListAction.do?pageNum=1" />' class="nav-item nav-link"><fmt:message key="community"/></a>
             </div>
             <a href="" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block"><fmt:message key="readMore" /><i class="fa fa-arrow-right ms-3"></i></a>
         </div>

@@ -45,6 +45,8 @@
     	int total_record = (Integer)request.getAttribute("total_record");
     	int total_page = (Integer)request.getAttribute("total_page");
     %>
+    
+    
 </head>
 
 <body>
@@ -62,15 +64,28 @@
 
 	<!-- header include -->
     <%@ include file="/step06/navi.jsp" %>
+    
+    <script>
+    	let checkSignIn = () => {
+    		if(${sessionId==null}) {
+    			alert("로그인 해주세요.");
+    			location.href="./member/signIn.jsp";
+    			return false;
+    		}
+    		location.href="./BoardWriteForm.do?id=<%=sessionId %>";
+    	}
+    </script>
+    
+    
     <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5">
         <div class="container py-5">
-            <h1 class="display-3 text-white mb-3 animated slideInDown">Contact</h1>
+            <h1 class="display-3 text-white mb-3 animated slideInDown"><fmt:message key="community"/></h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-white active" aria-current="page">Contact</li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#"><fmt:message key="home"/></a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#"><fmt:message key="pages"/></a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page"><fmt:message key="community"/></li>
                 </ol>
             </nav>
         </div>
@@ -121,16 +136,16 @@
     				<tr>
     					<td width="150px" align="left">
 	    					<select name="items" class="txt">
-		    					<option value="subject">제목에서</option>
+		    					<option value="title">제목에서</option>
 		    					<option value="content">본문에서</option>
 		    					<option value="name">글쓴이에서</option>
 		    				</select>
 		    				<input type="text" name="text" />
 		    				<input type="submit" class="btn btn-info" value="검색" />
-		    				<a class="btn btn-primary" href="'<c:url value="/BoardListAction.do?pageNum=1"/>'">검색 초기화</a>
+		    				<a class="btn btn-primary" href='<c:url value="/BoardListAction.do?pageNum=1"/>'>검색 초기화</a>
     					</td>
     					<td width="100" align="right">
-    						<a href="#">글쓰기</a>
+    						<a href="#" onclick="checkSignIn()">글쓰기</a>
     					</td>
     				</tr>
     			</table>

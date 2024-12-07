@@ -28,10 +28,10 @@ public class BoardDAO {
 		
 		String sql;
 		
-		if (items == null && text == null) // 검색을 안 했을 때
-			sql = "select count(*) from board";
-		else
-			sql = "select count(*) from board where "+items+" like '%"+text+"%'";
+		if (items == null && text == null) { // 검색을 안 했을 때
+			sql = "select count(*) from board";}
+		else {
+			sql = "select count(*) from board where "+items+" like '%"+text+"%'";}
 		
 		try {
 			conn = DBConnection.getConnection();
@@ -75,7 +75,7 @@ public class BoardDAO {
 				board.setContent(rs.getString("content"));
 				board.setRegist_date(rs.getString("regist_date"));
 				board.setUpdate_date(rs.getString("update_date"));
-				board.setCount_click(rs.getString("count_click"));
+				board.setCount_click(rs.getInt("count_click"));
 				board.setIp(rs.getString("ip"));
 				
 				list.add(board);
@@ -117,9 +117,9 @@ public class BoardDAO {
 		ArrayList<BoardDTO> list = new ArrayList<BoardDTO>();
 		try {
 			conn = DBConnection.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while(rs.absolute(index)) {
 				BoardDTO board = new BoardDTO();
 				board.setNum(rs.getInt("board_seq"));
 				board.setId(rs.getString("id"));
@@ -128,7 +128,7 @@ public class BoardDAO {
 				board.setContent(rs.getString("content"));
 				board.setRegist_date(rs.getString("regist_date"));
 				board.setUpdate_date(rs.getString("update_date"));
-				board.setCount_click(rs.getString("count_click"));
+				board.setCount_click(rs.getInt("count_click"));
 				board.setIp(rs.getString("ip"));
 				
 				list.add(board);
@@ -153,4 +153,71 @@ public class BoardDAO {
 		}
 		return list;
 	}
+	
+	// member테이블에서 인증된 id의 사용자명 가져오는 함수
+	public String getSignInNameById(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;ㅁㅁㅁ
+		
+		String name = null;
+		String sql = "select name from member where id=?";
+		
+		try {
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) name = rs.getString("name");
+			System.out.println(name);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("매개변수 id를 가진 getSignInNameById() 에러 : "+e);
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return name;
+	}
+	
+	public void insertBoard(BoardDTO board) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		// id, name, title, content, regist_date, update_date, count_click, ip
+		String sql = "insert into board values(board_seq.nextval, ?, ?, ?, ?, default, sysdate, ?, ?)";
+		System.out.println("insertBoard!@#$");
+		try {
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, board.getId());
+			pstmt.setString(2, board.getName());
+			pstmt.setString(3, board.getTitle());
+			pstmt.setString(4, board.getContent());
+			pstmt.setInt(5, board.getCount_click());
+			pstmt.setString(6, board.getIp());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("매개변수 id를 가진 getSignInNameById() 에러 : "+e);
+		} finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
+	
 }

@@ -68,7 +68,7 @@
     	<%
     	String id = request.getParameter("id");
     	    		/* Product product = productDAO.getProductById(id); */
-    	    		Project product = ProductRepository.getInstance().getProductById(id);
+    	    		// Product product = ProductRepository.getInstance().getProductById(id);
     	    		if (conn == null) {
     			        out.println("Database connection is null. Cannot proceed.");
     			    } else {

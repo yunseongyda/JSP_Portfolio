@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.Project" %>
-<%-- <%@ page import="dao.ProductRepository" %> --%>
+<%@ page import="dto.Product" %>
+<%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%-- <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/> --%>
+<jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
 <!DOCTYPE html>
 <html lang="en">
-
+s
 <head>
     <meta charset="utf-8">
     <title>like list</title>
@@ -86,12 +86,12 @@
     			</tr>
     			<%
     			int sum = 0; // 총 좋아요 수
-    			    				ArrayList<Project> likelist = (ArrayList<Project>)session.getAttribute("likeList");
+    			    				ArrayList<Product> likelist = (ArrayList<Product>)session.getAttribute("likeList");
     			    				
-    			    				if (likelist == null) likelist = new ArrayList<Project>();
+    			    				if (likelist == null) likelist = new ArrayList<Product>();
     			    				
     			    				for (int i=0; i<likelist.size(); i++) {
-    			    					Project product = likelist.get(i);
+    			    					Product product = likelist.get(i);
     			    					sum += product.getQuantity();
     			%>
     			<tr>

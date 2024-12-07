@@ -1,16 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="dto.Project" %>
+<%@ page import="dao.ProductRepository" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Woody - Carpenter Website Template</title>
+    <title>write board</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="../resources/img/favicon.ico" rel="icon">
+    <link href="${pageContext.request.contextPath }/resources/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,18 +28,43 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="../resources/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="../resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="../resources/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/resources/css/style.css" rel="stylesheet">
+    
+	<script>
+		let checkForm = () =>{
+			if(!document.newWrite.name.value){
+				alert("이름을 입력하세요");
+				document.newWrite.name.focus()
+				return false
+			}
+			if(!document.newWrite.title.value){
+				alert("제목을 입력하세요");
+				document.newWrite.title.focus()
+				return false
+			}
+			if(!document.newWrite.content.value){
+				alert("내용을 입력하세요");
+				document.newWrite.content.focus()
+				return false
+			}
+		}
+	</script>
 </head>
-
+<%
+	String name = (String)request.getAttribute("name");
+%>
 <body>
+	<fmt:setLocale value='<%= request.getParameter("language") %>' />
+	<fmt:bundle basename="bundle.message">
+	
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -43,7 +74,8 @@
     <!-- Spinner End -->
 
     <!-- Topbar Start -->
-    <%@ include file="navi.jsp" %>
+    <%@ include file="/step06/navi.jsp" %>
+    
     <!-- Topbar End -->
 
     <!-- Navbar Start -->
@@ -53,12 +85,12 @@
     <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5">
         <div class="container py-5">
-            <h1 class="display-3 text-white mb-3 animated slideInDown">Contact</h1>
+            <h1 class="display-3 text-white mb-3 animated slideInDown"><fmt:message key="community" /></h1>
             <nav aria-label="breadcrumb animated slideInDown">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                    <li class="breadcrumb-item text-white active" aria-current="page">Contact</li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#"><fmt:message key="home" /></a></li>
+                    <li class="breadcrumb-item"><a class="text-white" href="#"><fmt:message key="pages" /></a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page"><fmt:message key="community" /></li>
                 </ol>
             </nav>
         </div>
@@ -72,38 +104,40 @@
                 <div class="col-lg-6 contact-text py-5 wow fadeIn" data-wow-delay="0.5s">
                     <div class="p-lg-5 ps-lg-0">
                         <div class="section-title text-start">
-                            <h1 class="display-5 mb-4">Contact Us</h1>
+                            <h1 class="display-5 mb-4"><fmt:message key="createPost" /></h1>
                         </div>
                         <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                        <form>
+                        <form name="newWrite" action="<c:url value="/BoardWriteActoin.do" />" onsubmit="return checkForm()" method="post">
+                        	<input type="hidden" name="id" value="${sessionId }"/>
                             <div class="row g-3">
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                        <input type="text" class="form-control" id="name" placeholder="Your Name" value="<%=name %>" name="name">
                                         <label for="name">Your Name</label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
+                                        <input type="text" class="form-control" id="title" placeholder="Title" name="title">
+                                        <label for="title">Title</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                        <label for="subject">Subject</label>
+                                        <textarea class="form-control" placeholder="Leave a message here" id="content" style="height: 100px" name="content"></textarea>
+                                        <label for="content">Content</label>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
-                                        <label for="message">Message</label>
-                                    </div>
+                                <div class="col-4">
+                                    <input class="btn btn-primary w-100 py-3" type="submit" value="Post"/>
                                 </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                <div class="col-4">
+                                    <input class="btn btn-danger w-100 py-3" type="reset" value="Cancel"/>
                                 </div>
+                                <div class="col-4">
+                                    <input class="btn btn-warning w-100 py-3" type="button" value="Previous" onclick="history.back()"/>
+                                </div>
+                                
                             </div>
                         </form>
                     </div>
@@ -122,7 +156,7 @@
     <!-- Contact End -->
 
     <!-- Footer Start -->
-    <%@ include file="footer.jsp" %>
+    <%@ include file="/step06/footer.jsp" %>
     <!-- Footer End -->
 
     <!-- Back to Top -->
@@ -131,14 +165,17 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../resources/lib/wow/wow.min.js"></script>
-    <script src="../resources/lib/easing/easing.min.js"></script>
-    <script src="../resources/lib/waypoints/waypoints.min.js"></script>
-    <script src="../resources/lib/counterup/counterup.min.js"></script>
-    <script src="../resources/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/wow/wow.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/easing/easing.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/waypoints/waypoints.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/counterup/counterup.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/lib/lightbox/js/lightbox.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="../resources/js/main.js"></script>
+    <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
+    </fmt:bundle>
 </body>
 
 </html>
