@@ -1,7 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.catalina.startup.ClassLoaderFactory.Repository"%>
 <%@page import="dto.Project"%>
-<%@page import="dao.ProductRepository"%>
+<%@page import="dao.ProjectRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,8 +18,8 @@ String id = request.getParameter("id");
 		return;
 	}
 	
-	ProductRepository dao = ProductRepository.getInstance();
-	Project product = dao.getProductById(id);	// 상품 아이디에 해당하는 객체 얻어옴
+	ProjectRepository dao = ProjectRepository.getInstance();
+	Project product = dao.getPortfolio(id);	// 상품 아이디에 해당하는 객체 얻어옴
 	
 	if (product == null) {
 		response.sendRedirect("exceptionNoProductId.jsp");
@@ -31,7 +31,7 @@ String id = request.getParameter("id");
 	Project portfoliosQnt = new Project();
 	for (int i=0; i<likelist.size(); i++) {	// 좋아요 리스트에 등록된 포폴을 하나씩 가져와서
 		portfoliosQnt = likelist.get(i);
-		if (portfoliosQnt.getProductId().equals(id)) {
+		if (portfoliosQnt.getP_id().equals(id)) {
 	likelist.remove(portfoliosQnt);
 		}
 	}

@@ -104,7 +104,7 @@
                             <p class="text-primary fw-medium mb-2"><%=projects.get(i).getP_name() %></p>
                             <h5 class="lh-base mb-0"><%=projects.get(i).getP_description() %></h5>
                             <p><%=projects.get(i).getP_like_count() %></p>
-                        	<a class="fw-medium" href="./project.jsp?id=<%=projects.get(i).getP_id() %>"><fmt:message key="readMore"/><i class="fa fa-arrow-right ms-2"></i></a>
+                        	<a class="fw-medium" href="./project/project.jsp?id=<%=projects.get(i).getP_id() %>"><fmt:message key="readMore"/><i class="fa fa-arrow-right ms-2"></i></a>
                         </div>
                     </div>
                 </div>

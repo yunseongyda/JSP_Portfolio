@@ -133,14 +133,20 @@
                                         <label for="content">Content</label>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <!-- <input class="btn btn-warning w-100 py-3" type="button" value="Previous" onclick="history.back()"/> -->
                                     <a href="./BoardListAction.do?pageNum=<%=nowPage %>" class="btn btn-warning w-100 py-3">Previous</a>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                 	<c:set var="userId" value="<%=notice.getId() %>"/>
                                 	<c:if test="${sessionId == userId }">
                                 		<input class="btn btn-success w-100 py-3" type="submit" value="Edit"/>
+                                	</c:if>
+                                </div>
+                                <div class="col-4">
+                                	<c:set var="userId" value="<%=notice.getId() %>"/>
+                                	<c:if test="${sessionId == userId }">
+                                		<a class="btn btn-danger w-100 py-3" href="./BoardDelAction.do?pageNum=<%=nowPage %>&num=<%=num%>">Delete</a>
                                 	</c:if>
                                 </div>
                             </div>

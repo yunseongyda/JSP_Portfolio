@@ -72,6 +72,10 @@ public class DataController extends HttpServlet{
 			requestBoardUpdate(request);
 			RequestDispatcher rd = request.getRequestDispatcher("/BoardListAction.do");
 			rd.forward(request, response);
+		} else if(command.equals("/BoardDelAction.do")) {
+			requestBoardDelete(request);
+			RequestDispatcher rd = request.getRequestDispatcher("/BoardListAction.do?");
+			rd.forward(request, response);
 		}
 		
 	}
@@ -176,8 +180,15 @@ public class DataController extends HttpServlet{
 		board.setIp(request.getRemoteAddr());
 		
 		dao.updateBoard(board);
+	}
+	
+	// 글 삭제하기
+	public void requestBoardDelete(HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("num"));
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 		
-		
+		BoardDAO board = BoardDAO.getInstance();
+		board.delBoard(num);
 	}
 	
 }

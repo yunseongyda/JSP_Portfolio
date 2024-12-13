@@ -320,5 +320,30 @@ public class BoardDAO {
 		}
 	}
 	
+	// 게시글 삭제
+	public void delBoard(int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "delete from board where board_seq = ?";
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("updateBoard() 에러 : "+e);
+		} finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	
 }

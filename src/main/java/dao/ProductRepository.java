@@ -13,6 +13,7 @@ public class ProductRepository {
 	}
 	
 	public ProductRepository() {
+		/*
 		Product phone1 = new Product("P001", "삼성Phone 8v");
 		phone1.setDescription("폰이다");
 		phone1.setFileName("nmixx_O.O01.jpg");
@@ -29,6 +30,7 @@ public class ProductRepository {
 		listOfProducts.add(phone1);
 		listOfProducts.add(phone2);
 		listOfProducts.add(phone3);
+		*/
 	}
 	
 	public ArrayList<Product> getAllProducts() {

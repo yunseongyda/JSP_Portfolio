@@ -117,22 +117,23 @@
 			    				<th>좋아요 수</th>
 			    			</tr>
     					</thead>
-		    			
-		    			<%
-		    					    			int sum = 0; // 총 좋아요 수
-		    					    					    				ArrayList<Project> likelist = (ArrayList<Project>)session.getAttribute("likeList");
-		    					    					    				
-		    					    					    				if (likelist == null) likelist = new ArrayList<Project>();
-		    					    					    				
-		    					    					    				for (int i=0; i<likelist.size(); i++) {
-		    					    					    					Project product = likelist.get(i);
-		    					    					    					sum += product.getQuantity();
-		    					    			%>
-		    			<tr>
-		    				<td><%=product.getProductId() %></td>
-		    				<td><%=product.getPname() %></td>
-		    				<td><%=product.getDescription() %></td>
-		    				<td><%=product.getQuantity() %></td>
+
+							<%
+							int sum = 0; // 총 좋아요 수
+							ArrayList<Project> likelist = (ArrayList<Project>) session.getAttribute("likeList");
+
+							if (likelist == null)
+								likelist = new ArrayList<Project>();
+
+							for (int i = 0; i < likelist.size(); i++) {
+								Project product = likelist.get(i);
+								sum += product.getP_like_count();
+							%>
+							<tr>
+		    				<td><%=product.getP_id() %></td>
+		    				<td><%=product.getP_name() %></td>
+		    				<td><%=product.getP_description() %></td>
+		    				<td><%=product.getP_like_count() %></td>
 		    			</tr>
 		    			
 		    			<%

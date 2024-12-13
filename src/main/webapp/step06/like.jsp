@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="dto.Product" %>
+<%@ page import="dto.Project" %>
 <%@ page import="dao.ProductRepository" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope ="session"/>
 <!DOCTYPE html>
 <html lang="en">
-s
 <head>
     <meta charset="utf-8">
     <title>like list</title>
@@ -86,20 +85,20 @@ s
     			</tr>
     			<%
     			int sum = 0; // 총 좋아요 수
-    			    				ArrayList<Product> likelist = (ArrayList<Product>)session.getAttribute("likeList");
+    			    				ArrayList<Project> likelist = (ArrayList<Project>)session.getAttribute("likeList");
     			    				
-    			    				if (likelist == null) likelist = new ArrayList<Product>();
+    			    				if (likelist == null) likelist = new ArrayList<Project>();
     			    				
     			    				for (int i=0; i<likelist.size(); i++) {
-    			    					Product product = likelist.get(i);
-    			    					sum += product.getQuantity();
+    			    					Project product = likelist.get(i);
+    			    					sum += product.getP_like_count();
     			%>
     			<tr>
-    				<td><%=product.getProductId() %></td>
-    				<td><%=product.getPname() %></td>
-    				<td><%=product.getDescription() %></td>
-    				<td><%=product.getQuantity() %></td>
-    				<td><a href="./cancelLike.jsp?id=<%=product.getProductId() %>" class="badge badge-danger text-danger border">좋아요 취소</a></td>
+    				<td><%=product.getP_id() %></td>
+    				<td><%=product.getP_name() %></td>
+    				<td><%=product.getP_description() %></td>
+    				<td><%=product.getP_like_count() %></td>
+    				<td><a href="./cancelLike.jsp?id=<%=product.getP_id() %>" class="badge badge-danger text-danger border">좋아요 취소</a></td>
     			</tr>
     			
     			<%

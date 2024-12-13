@@ -90,10 +90,10 @@
     			<p>언어 종류: <fmt:message key='<%=rs.getString("p_language_type") %>' /></p>
     			
     			<p>
-    				<form action="./addLike.jsp?id=<%=rs.getString("p_id") %>" name="addForm" method="post">
-    					<a href="./index.jsp#products" class="btn btn-secondary rounded-3 my-2">포트폴리오 목록</a>
+    				<form action="../step06/addLike.jsp?id=<%=rs.getString("p_id") %>" name="addForm" method="post">
+    					<a href='<c:url value="/ProjectListAction.do" />' class="btn btn-secondary rounded-3 my-2">포트폴리오 목록</a>
     					<input type="button" onclick="addToLike();" class="btn btn-danger rounded-3 my-2" value="좋아요"/>
-    					<a href="./like.jsp" class="btn btn-info rounded-3 my-2">좋아요 목록</a>
+    					<a href="../step06/like.jsp" class="btn btn-info rounded-3 my-2">좋아요 목록</a>
     				</form>
     			</p>
     		</div>

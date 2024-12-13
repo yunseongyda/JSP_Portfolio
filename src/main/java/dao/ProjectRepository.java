@@ -46,6 +46,44 @@ public class ProjectRepository {
 	}*/
 	
 	
+	public Project getPortfolio(String id){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql ="";
+		Project project = new Project();
+		try {
+			conn = DBConnection.getConnection();
+			if (id == null || id.isEmpty()) sql = "select * from portfolio";
+			else sql = "select * from portfolio where p_id = '"+ id +"'";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				project.setP_id(rs.getString("p_id"));
+				project.setP_name(rs.getString("p_name"));
+				project.setP_description(rs.getString("p_description"));
+				project.setP_img_name(rs.getString("p_img_name"));
+				project.setP_like_count(rs.getInt("p_like_counts"));
+				project.setP_type(rs.getString("p_type"));
+				project.setP_language_type(rs.getString("p_language_type"));
+			}
+		}
+		catch(Exception e) {
+			System.out.println("getListCount() error: "+e);
+		}
+		finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return project;
+	}
+	
 	public List<Project> getAllProject(String constraint){
 		List<Project> projects = new ArrayList<Project>();
 		Connection conn = null;
