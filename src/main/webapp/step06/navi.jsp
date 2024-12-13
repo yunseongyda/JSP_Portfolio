@@ -97,6 +97,7 @@
 		                        <a href='<c:url value="" />' class="dropdown-item"><c:out value="${sessionId}" /></a>
 		                        <a href='<c:url value="/member/processSignOut.jsp" />' class="dropdown-item"><fmt:message key="signOut" /></a>
 		                        <a href='<c:url value="/member/profiles.jsp" />' class="dropdown-item"><fmt:message key="profiles" /></a>
+		                        <a href='<c:url value="/step06/like.jsp" />' class="dropdown-item"><fmt:message key="like" /></a>
 		                    </div>
 		                </div>
 	    			</c:otherwise>
