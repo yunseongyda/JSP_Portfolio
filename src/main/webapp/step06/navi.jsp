@@ -72,7 +72,7 @@
 			            <div class="nav-item dropdown">
 							<a href='' class="nav-link dropdown-toggle fw-bold" data-bs-toggle="dropdown"><fmt:message key="manageProject" /></a>
 							<div class="dropdown-menu fade-up m-0">
-								<a href='<c:url value="./step06/addProject.jsp" />' class="dropdown-item"><fmt:message key="addProject" /></a>
+								<a href='<c:url value="../step06/addProject.jsp" />' class="dropdown-item"><fmt:message key="addProject" /></a>
 								<a href='<c:url value="/ProjectListAction.do?edit=update" />' class="dropdown-item"><fmt:message key="modifyProject" /></a>
 								<a href='<c:url value="/ProjectListAction.do?edit=delete" />' class="dropdown-item"><fmt:message key="deleteProject" /></a>
 			            	</div>
