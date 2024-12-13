@@ -6,7 +6,10 @@
 <%
 	String sessionId = (String)session.getAttribute("sessionId");
 %>
-
+<head>
+	<title>dev KYS - Project Collection Website</title>
+	<link href="./resources/img/favicon.png" rel="icon">
+</head>
 
 <!-- Topbar Start -->
     <div class="container-fluid bg-light p-0">

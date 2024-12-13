@@ -12,13 +12,13 @@
 
 <head>
 <meta charset="utf-8">
-<title>Woody - Carpenter Website Template</title>
+<title>dev KYS - Project Collection Website</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
 
 <!-- Favicon -->
-<link href="../resources/img/favicon.ico" rel="icon">
+<link href="./resources/img/favicon.png" rel="icon">
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">

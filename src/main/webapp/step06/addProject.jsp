@@ -12,7 +12,7 @@
     <meta content="" name="keywords">
  	<meta content="" name="description">
 <!-- Favicon -->
-    <link href="../resources/img/favicon.ico" rel="icon">
+    <link href="./resources/img/favicon.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

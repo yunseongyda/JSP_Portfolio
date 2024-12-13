@@ -8,12 +8,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>제품 상세보기</title>
+	<title>dev KYS - Project Collection Website</title>
+	<link href="../resources/img/favicon.png" rel="icon">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
  	<meta content="" name="description">
 <!-- Favicon -->
-    <link href="../resources/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

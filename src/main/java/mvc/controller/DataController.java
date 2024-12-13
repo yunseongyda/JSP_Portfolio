@@ -81,7 +81,7 @@ public class DataController extends HttpServlet{
 	}
 	
 	public void requestBoardList(HttpServletRequest request) { // 등록된 글 목록 가져오기
-		BoardDAO dao = BoardDAO.getInstance();
+		BoardDAO dao = BoardDAO.getInstance(); // 싱글톤
 		List<BoardDTO> boardList = new ArrayList<BoardDTO>();  // 다형성
 		int pageNum = 1;
 		int limit = LISTCOUNT; // 5
@@ -120,7 +120,7 @@ public class DataController extends HttpServlet{
 		request.setAttribute("boardlist", boardList);
 	}
 	
-	public void requestProjectList(HttpServletRequest request) { // 등록된 글 목록 가져오기
+	public void requestProjectList(HttpServletRequest request) { // 등록된 프로젝트 목록 가져오기
 		ProjectRepository dao = ProjectRepository.getInstance();
 		List<Project> projectList = dao.getAllProject(request.getParameter("constraint"));  // 다형성
 		

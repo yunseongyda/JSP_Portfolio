@@ -127,8 +127,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control" placeholder="Leave a message here" id="content" style="height: 100px" name="content">
-                                        	<%=notice.getContent() %>
+                                        <textarea class="form-control" placeholder="Leave a message here" id="content" style="height: 100px" name="content"><%=notice.getContent() %>
                                         </textarea>
                                         <label for="content">Content</label>
                                     </div>
