@@ -58,6 +58,7 @@
     			alert("비밀번호 확인을 입력해주세요.")
     			return false;
     		}
+    		
     		if (!document.signUp.name.value) {
     			alert("이름을 입력해주세요.")
     			return false;
@@ -73,6 +74,10 @@
     		}
     		if (!document.signUp.mail1.value || !document.signUp.mail2.value) {
     			alert("이메일을 입력해주세요.")
+    			return false;
+    		}
+    		if(document.signUp.password.value != document.signUp.password_confirm.value) {
+    			alert("비밀번호가 맞지 않습니다.")
     			return false;
     		}
     		document.signUp.submit();

@@ -28,8 +28,10 @@
 	String address = request.getParameter("address");
 	String mobile = request.getParameter("mobile");
 %>
-<sql:setDataSource var="dataSource" 
-url="jdbc:oracle:thin:@localhost:1521:xe"
+<%-- url="jdbc:oracle:thin:@localhost:1521:xe" --%>
+<sql:setDataSource var="dataSource"
+
+url="jdbc:oracle:thin:@192.168.123.101:1521:xe"
 driver="oracle.jdbc.driver.OracleDriver"
 user="C##dbexam"
 password="m1234" />

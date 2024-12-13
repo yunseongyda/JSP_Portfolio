@@ -146,7 +146,39 @@
                                 <div class="col-4">
                                 	<c:set var="userId" value="<%=notice.getId() %>"/>
                                 	<c:if test="${sessionId == userId }">
-                                		<a class="btn btn-danger w-100 py-3" href="./BoardDelAction.do?pageNum=<%=nowPage %>&num=<%=num%>">Delete</a>
+                                		<%-- <a class="btn btn-danger w-100 py-3" href="./BoardDelAction.do?pageNum=<%=nowPage %>&num=<%=num%>">Delete</a> --%>
+                                		<!-- 삭제 버튼 -->
+								<a class="btn btn-danger w-100 py-3" data-bs-toggle="modal"
+									href="#deleteModal"> Delete
+								</a>
+
+								<!-- 모달 -->
+								<div class="modal fade" id="deleteModal"
+									tabindex="-1" aria-labelledby="deleteModalLabel"
+									aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h1 class="modal-title fs-5"
+													id="deleteModalLabel">정말 이 게시글을
+													삭제하시겠습니까?</h1>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												제목: 
+												<%=notice.getTitle() %>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">취소</button>
+												<a href="./BoardDelAction.do?pageNum=<%=nowPage %>&num=<%=num%>">
+													<button type="button" class="btn btn-danger">삭제</button>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
                                 	</c:if>
                                 </div>
                             </div>

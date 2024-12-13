@@ -125,6 +125,7 @@ public class DataController extends HttpServlet{
 		List<Project> projectList = dao.getAllProject(request.getParameter("constraint"));  // 다형성
 		
 		request.setAttribute("projects", projectList);
+		request.setAttribute("edit", request.getParameter("edit"));
 		System.out.println("아우");
 	}
 	

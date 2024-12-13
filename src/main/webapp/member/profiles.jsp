@@ -46,42 +46,41 @@
     	}
     </style>
     <script>
-    	function checkForm() {
-    		if (!document.signUp.id.value) {
+    	 function checkForm() {
+    		if (!document.profiles.id.value) {
     			alert("아이디를 입력해주세요.")
     			return false;
     		}
-    		if (!document.signUp.password.value) {
+    		else if (!document.profiles.password.value) {
     			alert("비밀번호를 입력해주세요.")
     			return false;
     		}
-    		if (!document.signUp.password_confirm.value) {
+    		else if (!document.profiles.password_confirm.value) {
     			alert("비밀번호 확인을 입력해주세요.")
     			return false;
     		}
-    		if (!document.signUp.name.value) {
+    		else if (!document.profiles.name.value) {
     			alert("이름을 입력해주세요.")
     			return false;
     		}
-    		if (!document.signUp.gender.value) {
+    		else if (!document.profiles.gender.value) {
     			alert("성별을 입력해주세요.")
     			return false;
     		}
     		var select_month = document.getElementById("month");
-    		if (!document.signUp.birthyy.value || !document.signUp.birthdd.value || select_month.value==="") {
+    		else if (!document.profiles.birthyy.value || !document.profiles.birthdd.value || select_month.value==="") {
     			alert("생년월일을 입력해주세요.")
     			return false;
     		}
-    		if (!document.signUp.mail1.value || !document.signUp.mail2.value) {
+    		else if (!document.profiles.mail1.value || !document.profiles.mail2.value) {
     			alert("이메일을 입력해주세요.")
     			return false;
     		}
-    		document.signUp.submit();
     	}
     </script>
-    
+    <!-- url="jdbc:oracle:thin:@localhost:1521:xe" -->
     <sql:setDataSource var="dataSource" 
-	url="jdbc:oracle:thin:@localhost:1521:xe"
+	url="jdbc:oracle:thin:@192.168.123.101:1521:xe"
 	driver="oracle.jdbc.driver.OracleDriver"
 	user="C##dbexam"
 	password="m1234" />
@@ -125,6 +124,7 @@
 			<c:set var="birthDate" value="${birth.split('-')[2]}"/>
 			
 			<form name="profiles" class="form-horizontal" action="<c:url value='/member/processUpdateProfiles.jsp'/>" method="post">
+
 				<div class="gap-3">
 					<div class="form-group row">
 						<label class="col-sm-2 ">아이디</label>
@@ -304,6 +304,7 @@
     		if(document.profiles.confirm_current_password.value != document.profiles.current_password.value) {
     			form.confirm_current_password.focus();
     			alert("현재 비밀번호가 틀렸습니다.")
+    			return false;
     		}
     		if(!document.profiles.id.value){
     			alert("아이디를 입력하세요");
@@ -314,6 +315,7 @@
     		if(document.profiles.confirm_new_password.value != document.profiles.new_password.value) {
     			form.confirm_new_password.focus();
     			alert("새로운 비밀번호가 맞지 않습니다.")
+    			return false;
     		}
     		document.profiles.submit();
     			
