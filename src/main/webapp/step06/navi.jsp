@@ -92,7 +92,7 @@
 	    			</c:when>
 	    			<c:otherwise>
 	    				<div class="nav-item dropdown">
-                    		<a href="addProduct.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><fmt:message key="signIn" /></a>
+                    		<a href="addProduct.jsp" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><%=sessionId %></a>
                     		<div class="dropdown-menu fade-up m-0">
 		                        <a href='<c:url value="" />' class="dropdown-item"><c:out value="${sessionId}" /></a>
 		                        <a href='<c:url value="/member/processSignOut.jsp" />' class="dropdown-item"><fmt:message key="signOut" /></a>
